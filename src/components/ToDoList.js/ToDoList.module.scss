@@ -1,0 +1,61 @@
+@import "../../colors.scss";
+.toDoListContainer {
+    min-width: 320px;
+    width: 70%;
+    max-width: 750px;
+    margin: auto;
+    form {
+        label {
+            color: $secondary;
+            font-size: 1.5rem;
+            input {
+                margin-top: 1rem;
+                background-color: rgba($color: $primary, $alpha: 0.25);
+                padding: 0.8rem 0.8rem;
+                border: none;
+                border-radius: 6px;
+                width: 100%;
+                border: 1px solid $tertiary;
+                color: $secondary;
+                box-shadow: 0 0 0 0 $secondary;
+            }
+            ::placeholder {
+                color: $tertiary;
+                opacity: 0.5;
+            }
+            input:focus,
+            input:hover {
+                box-shadow: 0 0 4px 0px $secondary;
+                outline: none;
+                transition: box-shadow 0.2s;
+            }
+        }
+    }
+    .list {
+        display: flex;
+        flex-direction: column;
+        margin-top: 1.4rem;
+        gap: 1.2rem;
+        .task {
+            background-color: rgba($color: $secondary, $alpha: 1);
+            padding: 0.8rem 1rem 0.8rem 0.8rem;
+            border-radius: 8px;
+            color: $primary;
+            gap: 8px;
+            display: flex;
+            align-items: baseline;
+            justify-content: flex-start;
+            text-align: left;
+            box-shadow: 0 0 0 0 $other;
+            &:hover {
+                cursor: pointer;
+                box-shadow: 0 0 8px 0px $other;
+                transition: box-shadow 0.2s;
+            }
+            span {
+                font-weight: bold;
+                font-size: smaller;
+            }
+        }
+    }
+}
