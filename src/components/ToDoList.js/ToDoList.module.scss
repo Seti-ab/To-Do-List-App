@@ -6,11 +6,13 @@
     margin: auto;
     form {
         label {
-            color: $secondary;
-            font-size: 1.5rem;
+            h1{
+                color: $secondary;
+                font-size: 3rem;
+                margin: 1rem;
+            }
             input {
                 font-size: 1rem;
-                margin-top: 1rem;
                 background-color: rgba($color: $primary, $alpha: 0.25);
                 padding: 12px 16px;
                 border: none;
@@ -38,28 +40,6 @@
         flex-direction: column;
         margin-top: 1.4rem;
         gap: 1.2rem;
-        .task {
-            padding: 12px 16px 12px 12px;
-            border-radius: 8px;
-            gap: 8px;
-            display: flex;
-            align-items: baseline;
-            justify-content: flex-start;
-            text-align: left;
-            color: $tertiary;
-            font-family:cursive;
-            background-color: $other;
-            box-shadow: 0 0 0 0 $secondary;
-            &:hover {
-                cursor: pointer;
-                box-shadow: 0 0 8px -4px $secondary;
-                transition: box-shadow 0.2s;
-            }
-            span {
-                color: $secondary;
-                font-weight: bold;
-                font-size: small;
-            }
-        }
+        
     }
 }
