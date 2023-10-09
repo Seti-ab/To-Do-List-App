@@ -1,5 +1,6 @@
 import React, { useEffect, useReducer, useState } from 'react';
 import styles from "./ToDoList.module.scss";
+import Task from '../Task/Task';
 
 const ToDoList = () => {
 
@@ -14,6 +15,29 @@ const ToDoList = () => {
                         done: false,
                     }
                 ]
+            case "toggle":
+                return tasks.map(task => {
+                    if (task.id === action.payload.id) {
+                        return {
+                            ...task,
+                            done: !task.done
+                        }
+                    }
+                    return task
+                })
+            case "delete":
+                return tasks.filter(task => task.id !== action.payload.id)
+            case "edit":
+                return tasks.map(task=>{
+                    if(task.id===action.payload.id){
+                        return {
+                            ...task,
+                            title:action.payload.title
+                        }
+                    }
+                    return task;
+                })
+
             default:
                 return tasks;
 
@@ -22,6 +46,7 @@ const ToDoList = () => {
     const initialTasks = JSON.parse(sessionStorage.getItem("tasks"));
     const [tasks, dispatch] = useReducer(reducer, initialTasks || [])
     const [newTask, setNewTask] = useState("");
+
     const handleNewTaskChange = (e) => {
         setNewTask(e.target.value)
     }
@@ -34,8 +59,8 @@ const ToDoList = () => {
             }
         })
         setNewTask("");
-        console.log("input", tasks)
     }
+    console.log("tasks", tasks)
     useEffect(() => {
         sessionStorage.setItem("tasks", JSON.stringify(tasks));
         return () => {
@@ -53,12 +78,7 @@ const ToDoList = () => {
             </form>
             <ul className={styles.list}>
                 {tasks?.map((task, index) => {
-                    return (
-                        <li className={styles.task} key={task.id}>
-                            <span>{index + 1}.</span>
-                            <p>{task.title}</p>
-                        </li>
-                    )
+                    return <Task task={task} dispatch={dispatch} key={task.id} index={index} />
                 })}
             </ul>
 

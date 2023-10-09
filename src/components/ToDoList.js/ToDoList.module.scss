@@ -6,18 +6,22 @@
     margin: auto;
     form {
         label {
-            color: $secondary;
-            font-size: 1.5rem;
+            h1{
+                color: $secondary;
+                font-size: 3rem;
+                margin: 1rem;
+            }
             input {
-                margin-top: 1rem;
+                font-size: 1rem;
                 background-color: rgba($color: $primary, $alpha: 0.25);
-                padding: 0.8rem 0.8rem;
+                padding: 12px 16px;
                 border: none;
                 border-radius: 6px;
                 width: 100%;
                 border: 1px solid $tertiary;
-                color: $secondary;
-                box-shadow: 0 0 0 0 $secondary;
+                color: $tertiary;
+                box-shadow: 0 0 0 0 $tertiary;
+                font-family: cursive;
             }
             ::placeholder {
                 color: $tertiary;
@@ -25,7 +29,7 @@
             }
             input:focus,
             input:hover {
-                box-shadow: 0 0 4px 0px $secondary;
+                box-shadow: 0 0 8px -2px $tertiary;
                 outline: none;
                 transition: box-shadow 0.2s;
             }
@@ -36,26 +40,6 @@
         flex-direction: column;
         margin-top: 1.4rem;
         gap: 1.2rem;
-        .task {
-            background-color: rgba($color: $secondary, $alpha: 1);
-            padding: 0.8rem 1rem 0.8rem 0.8rem;
-            border-radius: 8px;
-            color: $primary;
-            gap: 8px;
-            display: flex;
-            align-items: baseline;
-            justify-content: flex-start;
-            text-align: left;
-            box-shadow: 0 0 0 0 $other;
-            &:hover {
-                cursor: pointer;
-                box-shadow: 0 0 8px 0px $other;
-                transition: box-shadow 0.2s;
-            }
-            span {
-                font-weight: bold;
-                font-size: smaller;
-            }
-        }
+        
     }
 }
