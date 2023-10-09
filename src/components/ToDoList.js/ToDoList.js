@@ -19,7 +19,7 @@ const ToDoList = () => {
 
         }
     }
-    const initialTasks = JSON.parse(sessionStorage.getItem("tasks"));
+    const initialTasks = JSON.parse(localStorage.getItem("tasks"));
     const [tasks, dispatch] = useReducer(reducer, initialTasks || [])
     const [newTask, setNewTask] = useState("");
     const handleNewTaskChange = (e) => {
@@ -37,7 +37,7 @@ const ToDoList = () => {
         console.log("input", tasks)
     }
     useEffect(() => {
-        sessionStorage.setItem("tasks", JSON.stringify(tasks));
+        localStorage.setItem("tasks", JSON.stringify(tasks));
         return () => {
 
         }
