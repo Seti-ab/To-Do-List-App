@@ -13,11 +13,8 @@
     justify-content: space-between;
     min-height: 48px;
     gap: 8px;
-    &:hover {
-        cursor: pointer;
-        //box-shadow: 0 0 8px -4px $secondary;
-        transition: box-shadow 0.2s;
-    }
+    cursor: pointer;
+
     .title {
         display: flex;
         align-items: baseline;
@@ -26,7 +23,7 @@
         gap: 8px;
         width: 100%;
         p{
-            word-break: break-all;
+            word-break: break-word;
         }
         .editingForm {
             width: 100%;
@@ -47,15 +44,20 @@
             cursor: pointer;
             border: none;
             background-color: transparent;
-            width: 26px;
-            height: 26px;
+            width: 28px;
+            height: 28px;
             border-radius: 6px;
+            transition: all 0.5s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             svg {
                 color: $secondary;
                 font-size: 14px;
             }
             &:hover {
                 background-color: rgba($color: $primary, $alpha: 0.3);
+                transition: all 0.2s;
             }
         }
     }

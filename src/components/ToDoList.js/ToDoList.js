@@ -1,6 +1,8 @@
 import React, { useEffect, useReducer, useState } from 'react';
 import styles from "./ToDoList.module.scss";
 import Task from '../Task/Task';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const ToDoList = () => {
 
@@ -28,11 +30,11 @@ const ToDoList = () => {
             case "delete":
                 return tasks.filter(task => task.id !== action.payload.id)
             case "edit":
-                return tasks.map(task=>{
-                    if(task.id===action.payload.id){
+                return tasks.map(task => {
+                    if (task.id === action.payload.id) {
                         return {
                             ...task,
-                            title:action.payload.title
+                            title: action.payload.title
                         }
                     }
                     return task;
@@ -43,7 +45,7 @@ const ToDoList = () => {
 
         }
     }
-    const initialTasks = JSON.parse(sessionStorage.getItem("tasks"));
+    const initialTasks = JSON.parse(localStorage.getItem("tasks") || null);
     const [tasks, dispatch] = useReducer(reducer, initialTasks || [])
     const [newTask, setNewTask] = useState("");
 
@@ -62,23 +64,32 @@ const ToDoList = () => {
     }
     console.log("tasks", tasks)
     useEffect(() => {
-        sessionStorage.setItem("tasks", JSON.stringify(tasks));
-        return () => {
+        localStorage.setItem("tasks", JSON.stringify(tasks));
 
-        }
+        // return () => {
+
+        // }
     }, [tasks])
 
     return (
         <div className={styles.toDoListContainer}>
             <form onSubmit={handleSubmit}>
+                <h1>TO-DO List</h1>
                 <label>
-                    <h1>TO-DO List</h1>
                     <input type='text' value={newTask} onChange={handleNewTaskChange} placeholder="What's on your mind?" />
+                    <button type='submit'><FontAwesomeIcon icon={faPlus} /></button>
                 </label>
             </form>
             <ul className={styles.list}>
                 {tasks?.map((task, index) => {
-                    return <Task task={task} dispatch={dispatch} key={task.id} index={index} />
+                    if (task.done === false) {
+                        return <Task task={task} dispatch={dispatch} key={task.id} index={index} />
+                    }
+                })}
+                {tasks?.map((task, index) => {
+                    if (task.done === true) {
+                        return <Task task={task} dispatch={dispatch} key={task.id} index={index} />
+                    }
                 })}
             </ul>
 
