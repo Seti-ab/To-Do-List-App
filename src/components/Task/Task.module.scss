@@ -7,14 +7,19 @@
     color: $tertiary;
     font-family: cursive;
     background-color: $other;
-    //box-shadow: 0 0 0 0 $secondary;
     display: flex;
     align-items: center;
     justify-content: space-between;
     min-height: 48px;
     gap: 8px;
-    cursor: pointer;
-
+    &:hover {
+        cursor: pointer;
+        transition: box-shadow 0.2s ease-in-out;
+        .actions{
+            opacity: 1;
+            transition: opacity 0.2s ease-in-out;
+        }
+    }
     .title {
         display: flex;
         align-items: baseline;
@@ -40,6 +45,8 @@
     .actions {
         display: flex;
         gap: 8px;
+        opacity: 0;
+        transition: opacity 0.2s ease-in-out;
         button {
             cursor: pointer;
             border: none;
