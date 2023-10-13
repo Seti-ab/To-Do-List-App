@@ -3,6 +3,7 @@ import styles from "./Task.module.scss";
 import {
   faCheck,
   faPenToSquare,
+  faRotateLeft,
   faSquareCheck,
   faSquareMinus,
   faTrash,
@@ -31,9 +32,13 @@ const Task = ({ task, dispatch, index }) => {
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
-  })
+  });
 
+  const handleUndoEdit = () => {
+    setEditedTitle(task.title);
+  };
 
+  console.log("editedTitle", editedTitle);
   return (
     <li
       className={styles.task + " " + (task.done && styles.taskDone)}
@@ -79,6 +84,11 @@ const Task = ({ task, dispatch, index }) => {
                 value={editedTitle}
                 onChange={(e) => setEditedTitle(e.target.value)}
               />
+              {editedTitle !== task.title && (
+                <button className={styles.undoButton} onClick={handleUndoEdit}>
+                  <FontAwesomeIcon icon={faRotateLeft} />
+                </button>
+              )}
             </form>
           </div>
           <div className={styles.actions}>

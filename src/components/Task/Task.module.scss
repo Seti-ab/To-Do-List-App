@@ -1,84 +1,95 @@
 @import "../../colors.scss";
 
 .task {
-    padding: 8px 10px 8px 12px;
-    border-radius: 8px;
-    list-style-type: none;
-    color: $tertiary;
-    font-family: cursive;
-    background-color: $other;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    min-height: 48px;
-    gap: 8px;
-    &:hover {
-        cursor: pointer;
-        transition: box-shadow 0.2s ease-in-out;
-        .actions{
-            opacity: 1;
-            transition: opacity 0.2s ease-in-out;
-        }
-    }
-    .title {
-        display: flex;
-        align-items: baseline;
-        justify-content: flex-start;
-        text-align: left;
-        gap: 8px;
-        width: 100%;
-        p{
-            word-break: break-word;
-        }
-        .editingForm {
-            width: 100%;
-            input {
-                background:$tertiary ;
-                padding: 6px 8px;
-                border:none;
-                border-radius: 4px;
-                font-family: cursive;
-                width: 100%;
-            }
-        }
-    }
+  padding: 8px 10px 8px 12px;
+  border-radius: 8px;
+  list-style-type: none;
+  color: $tertiary;
+  font-family: cursive;
+  background-color: $other;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 48px;
+  gap: 8px;
+  &:hover {
+    cursor: pointer;
+    transition: box-shadow 0.2s ease-in-out;
     .actions {
-        display: flex;
-        gap: 8px;
-        opacity: 0;
-        transition: opacity 0.2s ease-in-out;
-        button {
-            cursor: pointer;
-            border: none;
-            background-color: transparent;
-            width: 28px;
-            height: 28px;
-            border-radius: 6px;
-            transition: all 0.5s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            svg {
-                color: $secondary;
-                font-size: 14px;
-            }
-            &:hover {
-                background-color: rgba($color: $primary, $alpha: 0.3);
-                transition: all 0.2s;
-            }
-        }
+      opacity: 1;
+      transition: opacity 0.2s ease-in-out;
     }
-    span {
+  }
+  .title {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-start;
+    text-align: left;
+    gap: 8px;
+    width: 100%;
+    p {
+      word-break: break-word;
+    }
+    .editingForm {
+      width: 100%;
+      position: relative;
+      input {
+        background: $tertiary;
+        padding: 6px 30px 6px 8px;
+        border: none;
+        border-radius: 4px;
+        font-family: cursive;
+        width: 100%;
+      }
+      .undoButton {
+        position: absolute;
+        background: transparent;
+        border: none;
+        color: $other;
+        height: 32px;
+        width: 32px;
+        right: 0;
+        cursor: pointer;
+      }
+    }
+  }
+  .actions {
+    display: flex;
+    gap: 8px;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    button {
+      cursor: pointer;
+      border: none;
+      background-color: transparent;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      transition: all 0.5s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      svg {
         color: $secondary;
-        font-weight: bold;
-        font-size: small;
+        font-size: 14px;
+      }
+      &:hover {
+        background-color: rgba($color: $primary, $alpha: 0.3);
+        transition: all 0.2s;
+      }
     }
+  }
+  span {
+    color: $secondary;
+    font-weight: bold;
+    font-size: small;
+  }
 }
 .taskDone {
-    opacity: 0.3;
-    background-color: $grey;
-    .actions button svg,
-    span {
-        color: $primary;
-    }
+  opacity: 0.3;
+  background-color: $grey;
+  .actions button svg,
+  span {
+    color: $primary;
+  }
 }
