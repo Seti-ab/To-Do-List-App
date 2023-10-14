@@ -1,16 +1,18 @@
 @import "../../colors.scss";
 .toDoListContainer {
-    min-width: 320px;
+    min-width: 300px;
     width: 70%;
     max-width: 750px;
     margin: auto;
     form {
+        h1 {
+            color: $secondary;
+            font-size: 3rem;
+            margin: 1rem;
+        }
         label {
-            h1{
-                color: $secondary;
-                font-size: 3rem;
-                margin: 1rem;
-            }
+            display: flex;
+            position: relative;
             input {
                 font-size: 1rem;
                 background-color: rgba($color: $primary, $alpha: 0.25);
@@ -22,16 +24,42 @@
                 color: $tertiary;
                 box-shadow: 0 0 0 0 $tertiary;
                 font-family: cursive;
+                transition: box-shadow 0.5s;
+                &:focus,
+                &:hover {
+                    box-shadow: 0 0 8px -2px $tertiary;
+                    outline: none;
+                    transition: box-shadow 0.2s;
+                }
             }
             ::placeholder {
                 color: $tertiary;
                 opacity: 0.5;
             }
-            input:focus,
-            input:hover {
-                box-shadow: 0 0 8px -2px $tertiary;
-                outline: none;
-                transition: box-shadow 0.2s;
+
+            button {
+                background-color: transparent;
+                color: $secondary;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid $secondary;
+                position: absolute;
+                right: 12px;
+                top: 10px;
+                cursor: pointer;
+                width: 28px;
+                height: 28px;
+                border-radius: 4px;
+                transition: all 0.5s;
+                outline: 1px solid transparent;
+                svg {
+                    font-size: 16px;
+                }
+                &:hover {
+                    outline: 1px solid $secondary;
+                    transition: all 0.2s;
+                }
             }
         }
     }
@@ -40,6 +68,5 @@
         flex-direction: column;
         margin-top: 1.4rem;
         gap: 1.2rem;
-        
     }
 }
