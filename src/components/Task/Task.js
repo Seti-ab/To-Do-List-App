@@ -40,13 +40,13 @@ const Task = ({ task, dispatch, index }) => {
 
   return (
     <li
-      className={styles.task + " " + (task.done && styles.taskDone)}
+      className={styles.task + " " + (task.done ? styles.taskDone : "")}
       ref={newRef}
     >
       {editMode === false ? (
         <>
           <div className={styles.title}>
-            <span>{index + 1}.</span>
+            <span>{index}.</span>
             <p onClick={() => setEditMode(true)}>{task?.title}</p>
           </div>
           <div className={styles.actions}>
@@ -76,7 +76,7 @@ const Task = ({ task, dispatch, index }) => {
       ) : (
         <>
           <div className={styles.title}>
-            <span>{index + 1}.</span>
+            <span>{index}.</span>
             <form onSubmit={handleConfirmEdit} className={styles.editingForm}>
               <input
                 type="text"
@@ -90,7 +90,7 @@ const Task = ({ task, dispatch, index }) => {
               )}
             </form>
           </div>
-          <div className={styles.actions}>
+          <div className={styles.actions + " " + styles.editingButtons}>
             <button onClick={() => setEditMode(false)}>
               <FontAwesomeIcon icon={faXmark} />
             </button>

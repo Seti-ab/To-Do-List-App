@@ -5,7 +5,6 @@
   border-radius: 8px;
   list-style-type: none;
   color: $tertiary;
-  font-family: cursive;
   background-color: $other;
   display: flex;
   align-items: center;
@@ -38,7 +37,6 @@
         padding: 6px 30px 6px 8px;
         border: none;
         border-radius: 4px;
-        font-family: cursive;
         width: 100%;
       }
       .undoButton {
@@ -50,6 +48,13 @@
         width: 32px;
         right: 0;
         cursor: pointer;
+        top: 1px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        :hover {
+          color: $primary;
+        }
       }
     }
   }
@@ -78,6 +83,11 @@
       }
     }
   }
+  .editingButtons {
+    opacity: 1;
+  }
+
+  //numbers
   span {
     color: $secondary;
     font-weight: bold;
