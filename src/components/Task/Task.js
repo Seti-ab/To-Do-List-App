@@ -38,7 +38,6 @@ const Task = ({ task, dispatch, index }) => {
     setEditedTitle(task.title);
   };
 
-  console.log("editedTitle", editedTitle);
   return (
     <li
       className={styles.task + " " + (task.done && styles.taskDone)}
