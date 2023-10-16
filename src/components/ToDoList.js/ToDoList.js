@@ -3,9 +3,9 @@ import styles from "./ToDoList.module.scss";
 import Task from '../Task/Task';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import toFarsiNumber from '../../utils/toFarsiNumber';
 
-const ToDoList = () => {
-
+const ToDoList = ({ locale }) => {
     const reducer = (tasks, action) => {
         switch (action.type) {
             case "add":
@@ -62,33 +62,32 @@ const ToDoList = () => {
         })
         setNewTask("");
     }
-    console.log("tasks", tasks)
     useEffect(() => {
         localStorage.setItem("tasks", JSON.stringify(tasks));
-
+        localStorage.setItem("locale", locale);
         // return () => {
 
         // }
-    }, [tasks])
+    }, [tasks, locale])
 
     return (
-        <div className={styles.toDoListContainer}>
+        <div className={styles.toDoListContainer + " " + (locale === "fa" ? styles.farsiToDoListContainer : "")} >
             <form onSubmit={handleSubmit}>
-                <h1>TO-DO List</h1>
+                <h1>{locale === "fa" ? "لیست کارها" : "TO-DO List"}</h1>
                 <label>
-                    <input type='text' value={newTask} onChange={handleNewTaskChange} placeholder="What's on your mind?" />
+                    <input type='text' value={newTask} onChange={handleNewTaskChange} placeholder={locale === "fa" ? "کارایی که باید انجام بدم..." : "Things i have to do..."} />
                     <button type='submit'><FontAwesomeIcon icon={faPlus} /></button>
                 </label>
             </form>
             <ul className={styles.list}>
                 {tasks?.map((task, index) => {
                     if (task.done === false) {
-                        return <Task task={task} dispatch={dispatch} key={task.id} index={index} />
+                        return <Task task={task} dispatch={dispatch} key={task.id} index={locale === "fa" ? toFarsiNumber(index + 1) : index + 1} />
                     }
                 })}
                 {tasks?.map((task, index) => {
                     if (task.done === true) {
-                        return <Task task={task} dispatch={dispatch} key={task.id} index={index} />
+                        return <Task task={task} dispatch={dispatch} key={task.id} index={locale === "fa" ? toFarsiNumber(index + 1) : index + 1} />
                     }
                 })}
             </ul>

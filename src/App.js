@@ -1,9 +1,16 @@
 import ToDoList from './components/ToDoList.js/ToDoList';
 import "./App.scss"
+import LanguageSelector from './components/LanguageSelector/LanguageSelector';
+import { useState } from 'react';
+
 function App() {
+
+  const [locale, setLocale] = useState("");
+
   return (
     <div className="App">
-      <ToDoList/>
+      <LanguageSelector locale={locale} setLocale={setLocale} />
+      <ToDoList locale={locale} />
     </div>
   );
 }

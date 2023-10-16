@@ -16,7 +16,7 @@
             input {
                 font-size: 1rem;
                 background-color: rgba($color: $primary, $alpha: 0.25);
-                padding: 12px 16px;
+                padding: 12px 48px 12px 16px;
                 border: none;
                 border-radius: 6px;
                 width: 100%;
@@ -68,5 +68,38 @@
         flex-direction: column;
         margin-top: 1.4rem;
         gap: 1.2rem;
+    }
+}
+.farsiToDoListContainer {
+    direction: rtl;
+    font-family: cursive, "Tanha";
+    form {
+        label {
+            input {
+                padding: 12px 12px 12px 48px !important;
+            }
+            ::placeholder {
+                color: $tertiary;
+                padding-right: 8px;
+            }
+            button {
+                right: unset;
+                left: 12px;
+            }
+        }
+    }
+    ul > li > div {
+        > p {
+            text-align: right !important;
+        }
+        form {
+            input {
+                padding: 6px 8px 6px 30px !important;
+            }
+            button {
+                right: unset !important;
+                left: 0;
+            }
+        }
     }
 }

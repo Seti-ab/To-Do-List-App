@@ -1,3 +1,13 @@
+@font-face {
+  font-family: Tanha;
+  src: url('./assets/fonts/tanha-font-v0.9/Tanha.eot'),
+       url('./assets/fonts/tanha-font-v0.9/Tanha.woff') format('woff'),
+       url('./assets/fonts/tanha-font-v0.9/Tanha.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  size-adjust: 90%;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
