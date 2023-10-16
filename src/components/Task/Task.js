@@ -41,8 +41,7 @@ const Task = ({ task, dispatch, index }) => {
   return (
     <li
       className={styles.task + " " + (task.done ? styles.taskDone : "")}
-      ref={newRef}
-    >
+      ref={newRef}>
       {editMode === false ? (
         <>
           <div className={styles.title} onClick={() => setEditMode(true)}>

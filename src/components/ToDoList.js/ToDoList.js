@@ -64,11 +64,11 @@ const ToDoList = ({ locale }) => {
     }
     useEffect(() => {
         localStorage.setItem("tasks", JSON.stringify(tasks));
-
+        localStorage.setItem("locale", locale);
         // return () => {
 
         // }
-    }, [tasks])
+    }, [tasks, locale])
 
     return (
         <div className={styles.toDoListContainer + " " + (locale === "fa" ? styles.farsiToDoListContainer : "")} >
