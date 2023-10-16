@@ -12,7 +12,6 @@ const customStyles = {
         cursor: "pointer",
         boxShadow: 'none',
         border: "0",
-        height: "30px",
         backgroundColor: "#4D4C7D"
     }),
     menu: (baseStyles) => ({
@@ -24,21 +23,15 @@ const customStyles = {
     }),
     valueContainer: (baseStyles) => ({
         ...baseStyles,
-        height: "30px",
-        padding: "0",
-    }),
-    input: (baseStyles) => ({
-        ...baseStyles,
-        margin: "0"
+        padding: "0 4px",
     }),
     indicatorsContainer: () => ({
         display: "none",
-        height: "30px"
     }),
     option: (baseStyles, state) => ({
         ...baseStyles,
         cursor: "pointer",
-        backgroundColor: state.isSelected ? "#ffad48" : "transparent"
+        backgroundColor: state.isSelected ? "#9b9b9b" : "transparent",
     })
 }
 const LanguageSelector = ({ setLocale }) => {
@@ -58,7 +51,7 @@ const LanguageSelector = ({ setLocale }) => {
                     onChange={handleLanguageChange}
                     options={options}
                     isSearchable={false}
-                    defaultValue={options.find(option => option.value === localStorage.getItem("locale"))}
+                    defaultValue={options.find(option => option.value === localStorage.getItem("locale")) || options[0]}
                     styles={customStyles}
                 />
             </form>
