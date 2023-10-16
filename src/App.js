@@ -7,9 +7,8 @@ function App() {
   const [locale, setLocale] = useState("en");
   return (
     <div className="App">
-      <div className="languageSelector">
-        <LanguageSelector locale={locale} setLocale={setLocale} />
-      </div>
+      <LanguageSelector locale={locale} setLocale={setLocale} />
+
       <ToDoList locale={locale} />
     </div>
   );

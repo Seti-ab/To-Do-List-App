@@ -88,13 +88,18 @@
             }
         }
     }
-    ul > li > div > form {
-        input {
-            padding: 6px 8px 6px 30px !important;
+    ul > li > div {
+        > p {
+            text-align: right !important;
         }
-        button {
-            right: unset !important;
-            left: 0;
+        form {
+            input {
+                padding: 6px 8px 6px 30px !important;
+            }
+            button {
+                right: unset !important;
+                left: 0;
+            }
         }
     }
 }

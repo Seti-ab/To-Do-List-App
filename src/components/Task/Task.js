@@ -45,9 +45,9 @@ const Task = ({ task, dispatch, index }) => {
     >
       {editMode === false ? (
         <>
-          <div className={styles.title}>
+          <div className={styles.title} onClick={() => setEditMode(true)}>
             <span>{index}.</span>
-            <p onClick={() => setEditMode(true)}>{task?.title}</p>
+            <p>{task?.title}</p>
           </div>
           <div className={styles.actions}>
             <button
@@ -84,7 +84,7 @@ const Task = ({ task, dispatch, index }) => {
                 onChange={(e) => setEditedTitle(e.target.value)}
               />
               {editedTitle !== task.title && (
-                <button className={styles.undoButton} onClick={handleUndoEdit}>
+                <button type="button" className={styles.undoButton} onClick={handleUndoEdit}>
                   <FontAwesomeIcon icon={faRotateLeft} />
                 </button>
               )}
