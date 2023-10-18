@@ -48,19 +48,34 @@ const ToDoList = ({ locale }) => {
     const initialTasks = JSON.parse(localStorage.getItem("tasks") || null);
     const [tasks, dispatch] = useReducer(reducer, initialTasks || [])
     const [newTask, setNewTask] = useState("");
+    const [error, setError] = useState(false);
 
-    const handleNewTaskChange = (e) => {
+    const addNewTaskHandler = (e) => {
         setNewTask(e.target.value)
     }
-    const handleSubmit = (e) => {
+
+    const checkInputHandler = (input) => {
+        if (input.length < 3) {
+            return false;
+        }
+        else return true;
+    }
+    const submitHandler = (e) => {
+        const isValid = checkInputHandler(newTask);
         e.preventDefault();
-        dispatch({
-            type: "add",
-            payload: {
-                title: newTask
-            }
-        })
-        setNewTask("");
+        if (isValid) {
+            dispatch({
+                type: "add",
+                payload: {
+                    title: newTask
+                }
+            })
+            setNewTask("");
+            setError(false);
+        } else {
+            setError(true);
+        }
+
     }
     useEffect(() => {
         localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -71,11 +86,18 @@ const ToDoList = ({ locale }) => {
     }, [tasks, locale])
 
     return (
-        <div className={styles.toDoListContainer + " " + (locale === "fa" ? styles.farsiToDoListContainer : "")} >
-            <form onSubmit={handleSubmit}>
+        <div
+            className={styles.toDoListContainer + " "
+                + (locale === "fa" ? styles.farsiToDoListContainer : "") + " "
+                + (error ? styles.error : "")} >
+            <form onSubmit={submitHandler}>
                 <h1>{locale === "fa" ? "لیست کارها" : "TO-DO List"}</h1>
                 <label>
-                    <input type='text' value={newTask} onChange={handleNewTaskChange} placeholder={locale === "fa" ? "کارایی که باید انجام بدم..." : "Things i have to do..."} />
+                    <input
+                        type='text'
+                        value={newTask}
+                        onChange={addNewTaskHandler}
+                        placeholder={locale === "fa" ? "کارایی که باید انجام بدم..." : "Things i have to do..."} />
                     <button type='submit'><FontAwesomeIcon icon={faPlus} /></button>
                 </label>
             </form>

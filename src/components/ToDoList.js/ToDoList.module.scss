@@ -17,7 +17,6 @@
                 font-size: 1rem;
                 background-color: rgba($color: $primary, $alpha: 0.25);
                 padding: 12px 48px 12px 16px;
-                border: none;
                 border-radius: 6px;
                 width: 100%;
                 border: 1px solid $tertiary;
@@ -99,6 +98,23 @@
             button {
                 right: unset !important;
                 left: 0;
+            }
+        }
+    }
+}
+// to be fixed later
+.error {
+    form {
+        label {
+            input {
+                border: 1px solid $secondary;
+                color: $tertiary;
+                box-shadow: 0 0 0 0 $secondary;
+                &:focus,
+                &:hover {
+                    box-shadow: none;
+                    outline: 1px solid $secondary;
+                }
             }
         }
     }
