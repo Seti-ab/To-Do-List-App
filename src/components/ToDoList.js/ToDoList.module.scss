@@ -1,9 +1,10 @@
 @import "../../colors.scss";
-.toDoListContainer {
+.contentContainer {
     min-width: 300px;
     width: 70%;
     max-width: 750px;
     margin: auto;
+    z-index: 1;
     form {
         h1 {
             color: $secondary;
@@ -65,7 +66,7 @@
     .list {
         display: flex;
         flex-direction: column;
-        margin-top: 1.4rem;
+        margin-top: 1.5rem;
         gap: 1.2rem;
     }
 }
@@ -102,20 +103,40 @@
         }
     }
 }
-// to be fixed later
-.error {
-    form {
-        label {
-            input {
-                border: 1px solid $secondary;
-                color: $tertiary;
-                box-shadow: 0 0 0 0 $secondary;
-                &:focus,
-                &:hover {
-                    box-shadow: none;
-                    outline: 1px solid $secondary;
-                }
-            }
+
+.errorBox form label {
+    input {
+        border: 1px solid $error;
+        color: $tertiary;
+        box-shadow: 0 0 0 0 $error;
+        &:focus,
+        &:hover {
+            box-shadow: none;
+            outline: 1px solid $error;
         }
     }
+}
+
+.errorMessage {
+    position: absolute;
+    text-align: left;
+    font-size: 0.7rem;
+    padding-top: 3px;
+    color: $error;
+    transition: opacity 0.2s ease-in;
+}
+.showError {
+    opacity: 1;
+    transition: opacity 0.2s ease-in;
+}
+.hideError {
+    opacity: 0;
+    transition: opacity 0.2s ease-in;
+}
+
+.background {
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    position: absolute;
 }
