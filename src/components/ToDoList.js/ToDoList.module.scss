@@ -7,7 +7,7 @@
     z-index: 1;
     form {
         h1 {
-            color: $secondary;
+            color: $secondary_color;
             font-size: 3rem;
             margin: 1rem;
         }
@@ -16,34 +16,34 @@
             position: relative;
             input {
                 font-size: 1rem;
-                background-color: rgba($color: $primary, $alpha: 0.25);
+                background-color: rgba($color: $primary_color, $alpha: 0.25);
                 padding: 12px 48px 12px 16px;
                 border-radius: 6px;
                 width: 100%;
-                border: 1px solid $tertiary;
-                color: $tertiary;
-                box-shadow: 0 0 0 0 $tertiary;
+                border: 1px solid $tertiary_color;
+                color: $tertiary_color;
+                box-shadow: 0 0 0 0 $tertiary_color;
                 font-family: cursive;
                 transition: box-shadow 0.5s;
                 &:focus,
                 &:hover {
-                    box-shadow: 0 0 8px -2px $tertiary;
+                    box-shadow: 0 0 8px -2px $tertiary_color;
                     outline: none;
                     transition: box-shadow 0.2s;
                 }
             }
             ::placeholder {
-                color: $tertiary;
+                color: $tertiary_color;
                 opacity: 0.5;
             }
 
             button {
                 background-color: transparent;
-                color: $secondary;
+                color: $secondary_color;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                border: 1px solid $secondary;
+                border: 1px solid $secondary_color;
                 position: absolute;
                 right: 12px;
                 top: 10px;
@@ -57,7 +57,7 @@
                     font-size: 16px;
                 }
                 &:hover {
-                    outline: 1px solid $secondary;
+                    outline: 1px solid $secondary_color;
                     transition: all 0.2s;
                 }
             }
@@ -79,7 +79,7 @@
                 padding: 12px 12px 12px 48px !important;
             }
             ::placeholder {
-                color: $tertiary;
+                color: $tertiary_color;
                 padding-right: 8px;
             }
             button {
@@ -106,13 +106,13 @@
 
 .errorBox form label {
     input {
-        border: 1px solid $error;
-        color: $tertiary;
-        box-shadow: 0 0 0 0 $error;
+        border: 1px solid $error_color;
+        color: $tertiary_color;
+        box-shadow: 0 0 0 0 $error_color;
         &:focus,
         &:hover {
             box-shadow: none;
-            outline: 1px solid $error;
+            outline: 1px solid $error_color;
         }
     }
 }
@@ -122,7 +122,7 @@
     text-align: left;
     font-size: 0.7rem;
     padding-top: 3px;
-    color: $error;
+    color: $error_color;
     transition: opacity 0.2s ease-in;
 }
 .showError {
