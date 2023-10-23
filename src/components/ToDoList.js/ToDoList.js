@@ -4,8 +4,12 @@ import Task from '../Task/Task';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import toFarsiNumber from '../../utils/toFarsiNumber';
+import { useTranslation } from 'react-i18next';
+import i18n from '../../i18n';
 
 const ToDoList = ({ locale }) => {
+    const { t } = useTranslation("");
+
     const reducer = (tasks, action) => {
         switch (action.type) {
             case "add":
@@ -72,9 +76,9 @@ const ToDoList = ({ locale }) => {
             setError({ ...error, show: false });
 
         } if (newTask.length < 3) {
-            setError({ show: true, message: "Input must be at least 3 characters." });
+            setError({ show: true, message: t("input_must_be_at_least_3_characters") });
         } else if (newTask.length > 250) {
-            setError({ show: true, message: "Input can't be more than 250 characters." });
+            setError({ show: true, message: t("input_cant_be_more_than_250_characters") });
 
         } else {
             setError({ ...error, show: false })
@@ -83,13 +87,11 @@ const ToDoList = ({ locale }) => {
 
     useEffect(() => {
         localStorage.setItem("tasks", JSON.stringify(tasks));
-        localStorage.setItem("locale", locale);
         // return () => {
-
+        
         // }
-
-    }, [tasks, locale])
-
+    }, [tasks])
+    
     return (
         <>
             <div className={styles.background} onClick={() => setError({ ...error, show: false })}></div>
@@ -98,30 +100,26 @@ const ToDoList = ({ locale }) => {
                     + (locale === "fa" ? styles.farsiToDoListContainer : "") + " "
                     + (error.show ? styles.errorBox : "")}>
                 <form onSubmit={submitHandler}>
-                    <h1>{locale === "fa" ? "لیست کارها" : "TO-DO List"}</h1>
+                    <h1>{t('to_do_list')}</h1>
                     <label>
                         <input
                             type='text'
                             value={newTask}
                             onChange={addNewTaskHandler}
-                            placeholder={locale === "fa" ? "کارایی که باید انجام بدم..." : "Things i have to do..."} />
+                            placeholder={t('things_i_have_to_do')} />
                         {isValid && <button type='submit'><FontAwesomeIcon icon={faPlus} /></button>}
                     </label>
                 </form>
+
                 <p className={styles.errorMessage + " " + (error.show ? styles.showError : styles.hideError)}>{error.message}</p>
                 <ul className={styles.list}>
-                    {tasks?.map((task, index) => {
-                        if (task.done === false) {
-                            return <Task task={task} dispatch={dispatch} key={task.id} index={locale === "fa" ? toFarsiNumber(index + 1) : index + 1} />
-                        }
-                    })}
-                    {tasks?.map((task, index) => {
-                        if (task.done === true) {
-                            return <Task task={task} dispatch={dispatch} key={task.id} index={locale === "fa" ? toFarsiNumber(index + 1) : index + 1} />
-                        }
-                    })}
+                    {tasks?.map((task, index) => (
+                        task.done === false && <Task task={task} dispatch={dispatch} key={task.id} index={locale === "fa" ? toFarsiNumber(index + 1) : index + 1} />
+                    ))}
+                    {tasks?.map((task, index) => (
+                        task.done === true && <Task task={task} dispatch={dispatch} key={task.id} index={locale === "fa" ? toFarsiNumber(index + 1) : index + 1} />
+                    ))}
                 </ul>
-
             </div>
         </>
     )

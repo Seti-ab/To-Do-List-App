@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styles from "./LanguageSelector.module.scss";
 import Farsi from "../../assets/icons/iran.png";
 import English from "../../assets/icons/united-kingdom.png";
 import Select from 'react-select';
+import i18n from '../../i18n';
 
 const customStyles = {
     control: (baseStyles) => ({
@@ -38,10 +39,12 @@ const LanguageSelector = ({ setLocale }) => {
 
     const handleLanguageChange = (selected) => {
         setLocale(selected.value);
+        i18n.changeLanguage(selected.value);
+        localStorage.setItem("locale",selected.value)
     }
     const options = [
-        { value: 'en', label: <div className={styles.options}><img src={English} height="15px" width="15px" />En </div> },
-        { value: 'fa', label: <div className={styles.options}><img src={Farsi} height="15px" width="15px" />Fa </div> },
+        { value: 'en', label: <div className={styles.options}><img src={English} height="15px" width="15px" alt="en" />En </div> },
+        { value: 'fa', label: <div className={styles.options}><img src={Farsi} height="15px" width="15px" alt="fa" />Fa </div> },
     ];
 
     return (
