@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 function App() {
 
-  const [locale, setLocale] = useState("");
+  const [locale, setLocale] = useState(localStorage.getItem("locale"));
 
   return (
     <div className="App">

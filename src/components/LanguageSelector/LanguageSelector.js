@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styles from "./LanguageSelector.module.scss";
 import Farsi from "../../assets/icons/iran.png";
 import English from "../../assets/icons/united-kingdom.png";
 import Select from 'react-select';
+import i18n from '../../i18n';
 
 const customStyles = {
     control: (baseStyles) => ({
@@ -12,7 +13,6 @@ const customStyles = {
         cursor: "pointer",
         boxShadow: 'none',
         border: "0",
-        height: "30px",
         backgroundColor: "#4D4C7D"
     }),
     menu: (baseStyles) => ({
@@ -24,31 +24,27 @@ const customStyles = {
     }),
     valueContainer: (baseStyles) => ({
         ...baseStyles,
-        height: "30px",
-        padding: "0",
-    }),
-    input: (baseStyles) => ({
-        ...baseStyles,
-        margin: "0"
+        padding: "0 4px",
     }),
     indicatorsContainer: () => ({
         display: "none",
-        height: "30px"
     }),
     option: (baseStyles, state) => ({
         ...baseStyles,
         cursor: "pointer",
-        backgroundColor: state.isSelected ? "#ffad48" : "transparent"
+        backgroundColor: state.isSelected ? "#9b9b9b" : "transparent",
     })
 }
 const LanguageSelector = ({ setLocale }) => {
 
     const handleLanguageChange = (selected) => {
         setLocale(selected.value);
+        i18n.changeLanguage(selected.value);
+        localStorage.setItem("locale",selected.value)
     }
     const options = [
-        { value: 'en', label: <div className={styles.options}><img src={English} height="15px" width="15px" />En </div> },
-        { value: 'fa', label: <div className={styles.options}><img src={Farsi} height="15px" width="15px" />Fa </div> },
+        { value: 'en', label: <div className={styles.options}><img src={English} height="15px" width="15px" alt="en" />En </div> },
+        { value: 'fa', label: <div className={styles.options}><img src={Farsi} height="15px" width="15px" alt="fa" />Fa </div> },
     ];
 
     return (
@@ -58,7 +54,7 @@ const LanguageSelector = ({ setLocale }) => {
                     onChange={handleLanguageChange}
                     options={options}
                     isSearchable={false}
-                    defaultValue={options.find(option => option.value === localStorage.getItem("locale"))}
+                    defaultValue={options.find(option => option.value === localStorage.getItem("locale")) || options[0]}
                     styles={customStyles}
                 />
             </form>
