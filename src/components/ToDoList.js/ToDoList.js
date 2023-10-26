@@ -56,13 +56,13 @@ const ToDoList = ({ locale }) => {
         message: ""
     });
 
-    const addNewTaskHandler = (e) => {
+    const handleNewTaskAdd = (e) => {
         setNewTask(e.target.value);
         setError({ ...error, show: false })
     }
 
     const isValid = newTask.length >= 3 && newTask.length <= 255;
-    const submitHandler = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         if (isValid) {
             dispatch({
@@ -95,13 +95,13 @@ const ToDoList = ({ locale }) => {
                 className={styles.contentContainer + " "
                     + (locale === "fa" ? styles.farsiToDoListContainer : "") + " "
                     + (error.show ? styles.errorBox : "")}>
-                <form onSubmit={submitHandler}>
+                <form onSubmit={handleSubmit}>
                     <h1>{t('to_do_list')}</h1>
                     <label>
                         <input
                             type='text'
                             value={newTask}
-                            onChange={addNewTaskHandler}
+                            onChange={handleNewTaskAdd}
                             placeholder={t('things_i_have_to_do')} />
                         {isValid && <button type='submit'><FontAwesomeIcon icon={faPlus} /></button>}
                     </label>
