@@ -8,7 +8,7 @@ function App() {
   const [locale, setLocale] = useState(localStorage.getItem("locale"));
 
   return (
-    <div className="App">
+    <div className="App" data-theme="dark">
       <LanguageSelector locale={locale} setLocale={setLocale} />
       <ToDoList locale={locale} />
     </div>

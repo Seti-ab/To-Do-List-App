@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import toFarsiNumber from '../../utils/toFarsiNumber';
 import { useTranslation } from 'react-i18next';
-import i18n from '../../i18n';
 
 const ToDoList = ({ locale }) => {
     const { t } = useTranslation("");
@@ -87,9 +86,6 @@ const ToDoList = ({ locale }) => {
 
     useEffect(() => {
         localStorage.setItem("tasks", JSON.stringify(tasks));
-        // return () => {
-        
-        // }
     }, [tasks])
     
     return (
