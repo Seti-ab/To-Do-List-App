@@ -7,7 +7,7 @@ const CustomSelect = (props) => {
     control: (baseStyles) => ({
       ...baseStyles,
       width: props.name === "theme" ? "100px" : "fit-content",
-      padding: "8px",
+      padding: "4px",
       cursor: "pointer",
       boxShadow: "none",
       border: "0",
@@ -22,7 +22,7 @@ const CustomSelect = (props) => {
     }),
     valueContainer: (baseStyles) => ({
       ...baseStyles,
-      padding: "0 4px",
+      padding: "0 2px",
     }),
     indicatorsContainer: () => ({
       display: "none",
@@ -30,6 +30,7 @@ const CustomSelect = (props) => {
     singleValue: (baseStyles) => ({
       ...baseStyles,
       color: "var(--tertiary_color)",
+      justifySelf:"center"
     }),
     option: (baseStyles, state) => ({
       ...baseStyles,
@@ -40,6 +41,7 @@ const CustomSelect = (props) => {
       backgroundColor: state.isSelected
         ? "var(--secondary_color)"
         : "transparent",
+        padding:"8px"
     }),
   };
   return (

@@ -1,15 +1,17 @@
 import React from "react";
 import styles from "../CustomSelect/CustomSelect.module.scss";
 import CustomSelect from "../CustomSelect/CustomSelect";
+import { useTranslation } from "react-i18next";
 
 const ThemeSelector = ({ setTheme }) => {
+  const [t] = useTranslation();
   const options = [
     {
       value: "default",
       label: (
         <div className={styles.options}>
           <span className={styles.themePreview + " " + styles.default}></span>
-          Default
+          {t("default")}
         </div>
       ),
     },
@@ -18,7 +20,7 @@ const ThemeSelector = ({ setTheme }) => {
       label: (
         <div className={styles.options}>
           <span className={styles.themePreview + " " + styles.dark}></span>
-          Dark
+          {t("dark")}
         </div>
       ),
     },
@@ -27,7 +29,7 @@ const ThemeSelector = ({ setTheme }) => {
       label: (
         <div className={styles.options}>
           <span className={styles.themePreview + " " + styles.light}></span>
-          Light
+          {t("light")}
         </div>
       ),
     },
@@ -39,11 +41,7 @@ const ThemeSelector = ({ setTheme }) => {
   };
 
   return (
-    <CustomSelect
-      onChange={handleThemeChange}
-      options={options}
-      name="theme"
-    />
+    <CustomSelect onChange={handleThemeChange} options={options} name="theme" />
   );
 };
 
