@@ -13,14 +13,14 @@ const customStyles = {
         cursor: "pointer",
         boxShadow: 'none',
         border: "0",
-        backgroundColor: "#4D4C7D"
+        backgroundColor: "var(--primary_light_color)"
     }),
     menu: (baseStyles) => ({
         ...baseStyles,
         cursor: "pointer",
         color: "#222222",
-        backgroundColor: "#4D4C7D",
-        marginTop: "4px"
+        backgroundColor: "var(--primary_light_color)",
+        marginTop: "4px",
     }),
     valueContainer: (baseStyles) => ({
         ...baseStyles,
@@ -29,10 +29,15 @@ const customStyles = {
     indicatorsContainer: () => ({
         display: "none",
     }),
+    singleValue:(baseStyles)=>({
+        ...baseStyles,
+        color:"var(--tertiary_color)",
+      }),
     option: (baseStyles, state) => ({
         ...baseStyles,
         cursor: "pointer",
-        backgroundColor: state.isSelected ? "#9b9b9b" : "transparent",
+        color: state.isSelected ? "var(--primary_color)" : "var(--tertiary_color) ",
+        backgroundColor: state.isSelected ? "var(--secondary_color)" : "transparent",
     })
 }
 const LanguageSelector = ({ setLocale }) => {
@@ -40,7 +45,7 @@ const LanguageSelector = ({ setLocale }) => {
     const handleLanguageChange = (selected) => {
         setLocale(selected.value);
         i18n.changeLanguage(selected.value);
-        localStorage.setItem("locale",selected.value)
+        localStorage.setItem("locale", selected.value)
     }
     const options = [
         { value: 'en', label: <div className={styles.options}><img src={English} height="15px" width="15px" alt="en" />En </div> },
@@ -56,6 +61,7 @@ const LanguageSelector = ({ setLocale }) => {
                     isSearchable={false}
                     defaultValue={options.find(option => option.value === localStorage.getItem("locale")) || options[0]}
                     styles={customStyles}
+                    menuIsOpen
                 />
             </form>
         </div >
