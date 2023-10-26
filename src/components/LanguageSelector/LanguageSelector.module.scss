@@ -1,4 +1,3 @@
-@import "../../colors.css";
 .container {
     position: fixed;
     left: 5px;
@@ -9,7 +8,6 @@
         align-items:center;
         justify-content: center;
         gap: 3px;
-        color:var(--tertiary_color);
         font-family: cursive;
         font-size: 12px;
     }
