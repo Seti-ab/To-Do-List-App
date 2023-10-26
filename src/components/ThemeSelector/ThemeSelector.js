@@ -91,7 +91,6 @@ const ThemeSelector = ({ setTheme }) => {
             ) || options[0]
           }
           styles={customStyles}
-          menuIsOpen
         />
       </form>
     </div>

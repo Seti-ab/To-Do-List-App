@@ -61,7 +61,6 @@ const LanguageSelector = ({ setLocale }) => {
                     isSearchable={false}
                     defaultValue={options.find(option => option.value === localStorage.getItem("locale")) || options[0]}
                     styles={customStyles}
-                    menuIsOpen
                 />
             </form>
         </div >
