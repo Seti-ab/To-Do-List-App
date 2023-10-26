@@ -16,7 +16,7 @@ const Task = ({ task, dispatch, index }) => {
   const [editedTitle, setEditedTitle] = useState(task.title);
   const newRef = useRef(null);
 
-  const handleConfirmEdit = () => {
+  const handleEditConfirm = () => {
     dispatch({ type: "edit", payload: { title: editedTitle, id: task.id } });
     setEditMode(false);
   };
@@ -76,7 +76,7 @@ const Task = ({ task, dispatch, index }) => {
         <>
           <div className={styles.title}>
             <span>{index}.</span>
-            <form onSubmit={handleConfirmEdit} className={styles.editingForm}>
+            <form onSubmit={handleEditConfirm} className={styles.editingForm}>
               <input
                 type="text"
                 value={editedTitle}
@@ -93,7 +93,7 @@ const Task = ({ task, dispatch, index }) => {
             <button onClick={() => setEditMode(false)}>
               <FontAwesomeIcon icon={faXmark} />
             </button>
-            <button type="submit" onClick={handleConfirmEdit}>
+            <button type="submit" onClick={handleEditConfirm}>
               <FontAwesomeIcon icon={faCheck} />
             </button>
           </div>
