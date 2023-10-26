@@ -29,10 +29,14 @@ const customStyles = {
     indicatorsContainer: () => ({
         display: "none",
     }),
+    singleValue:(baseStyles)=>({
+        ...baseStyles,
+        color:"var(--tertiary_color)",
+      }),
     option: (baseStyles, state) => ({
         ...baseStyles,
         cursor: "pointer",
-        color: state.isSelected ? "var(--primary_color)" : "var(--secondary_color) ",
+        color: state.isSelected ? "var(--primary_color)" : "var(--tertiary_color) ",
         backgroundColor: state.isSelected ? "var(--secondary_color)" : "transparent",
     })
 }
