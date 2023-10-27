@@ -2,5 +2,8 @@
   "to_do_list": "To-Do List",
   "things_i_have_to_do": "Things i have to do...",
   "input_must_be_at_least_3_characters": "Input must be at least 3 characters.",
-  "input_cant_be_more_than_250_characters": "Input can't be more than 250 characters."
+  "input_cant_be_more_than_250_characters": "Input can't be more than 250 characters.",
+  "default": "Default",
+  "dark": "Dark",
+  "light": "Light"
 }
