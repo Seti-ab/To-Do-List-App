@@ -10,9 +10,9 @@ function App() {
   
   return (
     <div className="App" data-theme={theme}>
-      <LanguageSelector locale={locale} setLocale={setLocale} />
+      <LanguageSelector setLocale={setLocale} />
       <ToDoList locale={locale} />
-      <ThemeSelector theme={theme} setTheme={setTheme}/>
+      <ThemeSelector setTheme={setTheme}/>
     </div>
   );
 }

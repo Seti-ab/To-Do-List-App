@@ -4,18 +4,22 @@
   z-index: 3;
   .options {
     display: flex;
-    align-items: center;
     gap: 4px;
     font-family: "Tanha", cursive;
     font-size: 12px;
     width: fit-content;
+    align-items: flex-end;
+  }
+  img{
+    display: flex;
+    align-self: center;
   }
 
   .themePreview {
     width: 20px;
     height: 20px;
-    border-radius: 8px;
-    margin-right: 6px;
+    border-radius: 6px;
+    margin-right: 2px;
     background: linear-gradient(
       90deg,
       var(--primary_color),

@@ -6,7 +6,7 @@ const CustomSelect = (props) => {
   const customStyles = {
     control: (baseStyles) => ({
       ...baseStyles,
-      width: props.name === "theme" ? "100px" : "fit-content",
+      width: props.name === "theme" ? "80px" : "fit-content",
       padding: "4px",
       cursor: "pointer",
       boxShadow: "none",
@@ -30,7 +30,7 @@ const CustomSelect = (props) => {
     singleValue: (baseStyles) => ({
       ...baseStyles,
       color: "var(--tertiary_color)",
-      justifySelf:"center"
+      justifySelf: "center",
     }),
     option: (baseStyles, state) => ({
       ...baseStyles,
@@ -41,9 +41,10 @@ const CustomSelect = (props) => {
       backgroundColor: state.isSelected
         ? "var(--secondary_color)"
         : "transparent",
-        padding:"8px"
+      padding: "8px",
     }),
   };
+
   return (
     <div
       className={styles.container}
@@ -53,11 +54,9 @@ const CustomSelect = (props) => {
         <Select
           {...props}
           isSearchable={false}
-          defaultValue={
-            props.options.find(
-              (option) => option.value === localStorage.getItem(props.name)
-            ) || props.options[0]
-          }
+          value={props.options.filter(
+            (option) => option.value === localStorage.getItem(props.name)
+          )}
           styles={customStyles}
         />
       </form>
