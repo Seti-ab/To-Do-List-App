@@ -6,23 +6,23 @@ const CustomSelect = (props) => {
   const customStyles = {
     control: (baseStyles) => ({
       ...baseStyles,
-      width: props.name === "theme" ? "80px" : "fit-content",
+      width: props.name === "theme" ? "86px" : "fit-content",
       padding: "4px",
       cursor: "pointer",
       boxShadow: "none",
       border: "0",
-      backgroundColor: "var(--primary_light_color)",
+      backgroundColor: "var(--light_primary_color)",
     }),
     menu: (baseStyles) => ({
       ...baseStyles,
       cursor: "pointer",
       color: "#222222",
-      backgroundColor: "var(--primary_light_color)",
+      backgroundColor: "var(--light_primary_color)",
       marginTop: "4px",
     }),
     valueContainer: (baseStyles) => ({
       ...baseStyles,
-      padding: "0 2px",
+      padding: "4px 2px 0",
     }),
     indicatorsContainer: () => ({
       display: "none",
@@ -58,6 +58,7 @@ const CustomSelect = (props) => {
             (option) => option.value === localStorage.getItem(props.name)
           )}
           styles={customStyles}
+          menuPlacement="top"
         />
       </form>
     </div>

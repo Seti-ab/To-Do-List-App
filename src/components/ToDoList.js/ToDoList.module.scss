@@ -1,144 +1,144 @@
 .contentContainer {
-    min-width: 300px;
-    width: 70%;
-    max-width: 750px;
-    margin: auto;
-    z-index: 1;
-    form {
-        h1 {
-            color: var(--secondary_color);
-            font-size: 3rem;
-            margin: 1rem;
+  min-width: 300px;
+  width: 70%;
+  max-width: 750px;
+  margin: auto;
+  z-index: 1;
+  form {
+    h1 {
+      color: var(--secondary_color);
+      font-size: 3rem;
+      margin: 1rem;
+    }
+    label {
+      display: flex;
+      position: relative;
+      input {
+        font-size: 1rem;
+        background-color: rgba($color: var(--primary_color), $alpha: 0.25);
+        padding: 12px 48px 12px 16px;
+        border-radius: 6px;
+        width: 100%;
+        border: 1px solid var(--tertiary_color);
+        color: var(--tertiary_color);
+        box-shadow: 0 0 0 0 var(--tertiary_color);
+        font-family: cursive;
+        transition: box-shadow 0.5s;
+        &:focus,
+        &:hover {
+          box-shadow: 0 0 8px -2px var(--tertiary_color);
+          outline: none;
+          transition: box-shadow 0.2s;
         }
-        label {
-            display: flex;
-            position: relative;
-            input {
-                font-size: 1rem;
-                background-color: rgba($color: var(--primary_color), $alpha: 0.25);
-                padding: 12px 48px 12px 16px;
-                border-radius: 6px;
-                width: 100%;
-                border: 1px solid var(--tertiary_color);
-                color: var(--tertiary_color);
-                box-shadow: 0 0 0 0 var(--tertiary_color);
-                font-family: cursive;
-                transition: box-shadow 0.5s;
-                &:focus,
-                &:hover {
-                    box-shadow: 0 0 8px -2px var(--tertiary_color);
-                    outline: none;
-                    transition: box-shadow 0.2s;
-                }
-            }
-            ::placeholder {
-                color: var(--tertiary_color);
-                opacity: 0.5;
-            }
+      }
+      ::placeholder {
+        color: var(--tertiary_color);
+        opacity: 0.5;
+      }
 
-            button {
-                background-color: transparent;
-                color: var(--secondary_color);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border: 1px solid var(--secondary_color);
-                position: absolute;
-                right: 12px;
-                top: 10px;
-                cursor: pointer;
-                width: 28px;
-                height: 28px;
-                border-radius: 4px;
-                transition: all 0.5s;
-                outline: 1px solid transparent;
-                svg {
-                    font-size: 16px;
-                }
-                &:hover {
-                    outline: 1px solid var(--secondary_color);
-                    transition: all 0.2s;
-                }
-            }
-        }
-    }
-    .list {
+      button {
+        background-color: transparent;
+        color: var(--secondary_color);
         display: flex;
-        flex-direction: column;
-        margin-top: 1.5rem;
-        gap: 1.2rem;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--secondary_color);
+        position: absolute;
+        right: 12px;
+        top: 10px;
+        cursor: pointer;
+        width: 28px;
+        height: 28px;
+        border-radius: 4px;
+        transition: all 0.5s;
+        outline: 1px solid transparent;
+        svg {
+          font-size: 16px;
+        }
+        &:hover {
+          outline: 1px solid var(--secondary_color);
+          transition: all 0.2s;
+        }
+      }
     }
+  }
+  .list {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.5rem;
+    gap: 1.2rem;
+  }
 }
 .farsiToDoListContainer {
-    direction: rtl;
-    font-family: cursive, "Tanha";
+  direction: rtl;
+  font-family: cursive, "Tanha";
+  form {
+    label {
+      input {
+        padding: 12px 12px 12px 48px !important;
+      }
+      ::placeholder {
+        color: var(--tertiary_color);
+        padding-right: 8px;
+      }
+      button {
+        right: unset;
+        left: 12px;
+      }
+    }
+  }
+  ul > li > div {
+    > p {
+      text-align: right !important;
+    }
     form {
-        label {
-            input {
-                padding: 12px 12px 12px 48px !important;
-            }
-            ::placeholder {
-                color: var(--tertiary_color);
-                padding-right: 8px;
-            }
-            button {
-                right: unset;
-                left: 12px;
-            }
-        }
+      input {
+        padding: 6px 8px 6px 30px !important;
+      }
+      button {
+        right: unset !important;
+        left: 0;
+      }
     }
-    ul > li > div {
-        > p {
-            text-align: right !important;
-        }
-        form {
-            input {
-                padding: 6px 8px 6px 30px !important;
-            }
-            button {
-                right: unset !important;
-                left: 0;
-            }
-        }
-    }
+  }
 }
 
 .errorBox form label {
-    input {
-        border: 1px solid var(--error_color);
-        color: var(--tertiary_color);
-        box-shadow: 0 0 0 0 var(--error_color);
-        outline: 0 solid transparent;
-        transition: 0.2s all;
-        &:focus,
-        &:hover {
-            box-shadow: none;
-            transition: 0.2s all;
-            outline: 1px solid var(--error_color);
-        }
+  input {
+    border: 1px solid var(--error_color);
+    color: var(--tertiary_color);
+    box-shadow: 0 0 0 0 var(--error_color);
+    outline: 0 solid transparent;
+    transition: 0.2s all;
+    &:focus,
+    &:hover {
+      box-shadow: none;
+      transition: 0.2s all;
+      outline: 1px solid var(--error_color);
     }
+  }
 }
 
 .errorMessage {
-    position: absolute;
-    text-align: left;
-    font-size: 0.7rem;
-    padding-top: 3px;
-    color: var(--error_color);
-    transition: opacity 0.2s ease-in;
+  position: absolute;
+  text-align: left;
+  font-size: 0.7rem;
+  padding-top: 3px;
+  color: var(--error_color);
+  transition: opacity 0.2s ease-in;
 }
 .showError {
-    opacity: 1;
-    transition: opacity 0.2s ease-in;
+  opacity: 1;
+  transition: opacity 0.2s ease-in;
 }
 .hideError {
-    opacity: 0;
-    transition: opacity 0.2s ease-in;
+  opacity: 0;
+  transition: opacity 0.2s ease-in;
 }
 
 .background {
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  position: absolute;
 }

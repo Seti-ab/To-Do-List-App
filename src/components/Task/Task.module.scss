@@ -3,7 +3,7 @@
   border-radius: 8px;
   list-style-type: none;
   color: var(--tertiary_color);
-  background-color: var(--primary_light_color);
+  background-color: var(--light_primary_color);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -41,7 +41,7 @@
         position: absolute;
         background: transparent;
         border: none;
-        color: var(--primary_light_color);
+        color: var(--light_primary_color);
         height: 32px;
         width: 32px;
         right: 0;
@@ -60,6 +60,7 @@
     display: flex;
     opacity: 0;
     transition: opacity 0.2s ease-in-out;
+    gap: 10px;
     button {
       cursor: pointer;
       border: none;
@@ -73,10 +74,10 @@
       justify-content: center;
       svg {
         color: var(--secondary_color);
-        font-size: 14px;
+        font-size: 16px;
       }
       &:hover {
-        background-color: rgba($color: var(--primary_color), $alpha: 0.3);
+        background-color: var(--highlight_color);
         transition: all 0.2s;
       }
     }
@@ -94,10 +95,10 @@
   }
 }
 .taskDone {
-  opacity: 0.3;
+  opacity: 0.4;
   background-color: var(--grey);
   .actions button svg,
   span {
-    color: var(--primary_color);
+    color: var(--secondary_color);
   }
 }

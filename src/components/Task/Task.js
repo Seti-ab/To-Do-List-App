@@ -41,7 +41,8 @@ const Task = ({ task, dispatch, index }) => {
   return (
     <li
       className={styles.task + " " + (task.done ? styles.taskDone : "")}
-      ref={newRef}>
+      ref={newRef}
+    >
       {editMode === false ? (
         <>
           <div className={styles.title} onClick={() => setEditMode(true)}>
@@ -83,7 +84,11 @@ const Task = ({ task, dispatch, index }) => {
                 onChange={(e) => setEditedTitle(e.target.value)}
               />
               {editedTitle !== task.title && (
-                <button type="button" className={styles.undoButton} onClick={handleUndoEdit}>
+                <button
+                  type="button"
+                  className={styles.undoButton}
+                  onClick={handleUndoEdit}
+                >
                   <FontAwesomeIcon icon={faRotateLeft} />
                 </button>
               )}
