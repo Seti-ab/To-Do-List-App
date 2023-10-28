@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/to-do-list-app/static/css/main.32440c75.css",
+    "main.js": "/to-do-list-app/static/js/main.88bccd53.js",
+    "static/js/787.1dad13f8.chunk.js": "/to-do-list-app/static/js/787.1dad13f8.chunk.js",
+    "static/media/Tanha.eot": "/to-do-list-app/static/media/Tanha.73e5c99b01a03de40227.eot",
+    "static/media/Tanha.ttf": "/to-do-list-app/static/media/Tanha.153f40cbdccaa0d6790d.ttf",
+    "static/media/Tanha.woff": "/to-do-list-app/static/media/Tanha.f4a9b6f4f20f44e01e8d.woff",
+    "static/media/united-kingdom.png": "/to-do-list-app/static/media/united-kingdom.c8fd9227c3a4a1594399.png",
+    "index.html": "/to-do-list-app/index.html",
+    "main.32440c75.css.map": "/to-do-list-app/static/css/main.32440c75.css.map",
+    "main.88bccd53.js.map": "/to-do-list-app/static/js/main.88bccd53.js.map",
+    "787.1dad13f8.chunk.js.map": "/to-do-list-app/static/js/787.1dad13f8.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.32440c75.css",
+    "static/js/main.88bccd53.js"
+  ]
+}
