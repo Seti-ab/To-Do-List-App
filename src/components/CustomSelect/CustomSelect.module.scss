@@ -2,14 +2,10 @@
   .options {
     display: flex;
     gap: 4px;
-    font-family: "Tanha", cursive;
+    font-family: "PlaypenSans", "DigiSarvenaz";
     font-size: 12px;
     width: fit-content;
-    align-items: flex-end;
-  }
-  img {
-    display: flex;
-    align-self: baseline;
+    align-items: center;
   }
 
   .themePreview {

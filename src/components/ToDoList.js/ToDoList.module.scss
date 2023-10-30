@@ -22,7 +22,7 @@
         border: 1px solid var(--tertiary_color);
         color: var(--tertiary_color);
         box-shadow: 0 0 0 0 var(--tertiary_color);
-        font-family: cursive;
+        font-family: "PlaypenSans";
         transition: box-shadow 0.5s;
         &:focus,
         &:hover {
@@ -71,7 +71,7 @@
 }
 .farsiToDoListContainer {
   direction: rtl;
-  font-family: cursive, "Tanha";
+  font-family: "PlaypenSans", "DigiSarvenaz";
   form {
     label {
       input {
