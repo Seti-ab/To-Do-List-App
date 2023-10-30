@@ -45,6 +45,7 @@ const Task = ({ task, dispatch, index }) => {
     >
       {editMode === false ? (
         <>
+
           <div className={styles.title} onClick={() => setEditMode(true)}>
             <span>{index}.</span>
             <p>{task?.title}</p>
@@ -95,11 +96,11 @@ const Task = ({ task, dispatch, index }) => {
             </form>
           </div>
           <div className={styles.actions + " " + styles.editingButtons}>
-            <button onClick={() => setEditMode(false)}>
-              <FontAwesomeIcon icon={faXmark} />
-            </button>
             <button type="submit" onClick={handleEditConfirm}>
               <FontAwesomeIcon icon={faCheck} />
+            </button>
+            <button onClick={() => setEditMode(false)}>
+              <FontAwesomeIcon icon={faXmark} />
             </button>
           </div>
         </>

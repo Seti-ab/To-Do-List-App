@@ -24,9 +24,11 @@ function App() {
 
   return (
     <div className="App" data-theme={theme}>
-      <LanguageSelector setLocale={setLocale} />
       <ToDoList locale={locale} />
-      <ThemeSelector setTheme={setTheme} />
+      <div className="selectorsContainer">
+        <LanguageSelector setLocale={setLocale} />
+        <ThemeSelector setTheme={setTheme} />
+      </div>
     </div>
   );
 }

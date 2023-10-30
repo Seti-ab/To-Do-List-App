@@ -1,7 +1,7 @@
 @import "./themes.css";
 .App {
     text-align: center;
-    min-height: 100vh;
+    min-height: 94vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -10,9 +10,21 @@
     color: white;
     background-color: var(--primary_color);
     text-align: center;
+    .selectorsContainer {
+        position: fixed;
+        bottom: 0;
+        z-index: 3;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: var(--primary_color);
+        padding: 8px;
+    }
 }
 
-p , input{
-    font-family: cursive,"Tanha" !important;
-    font-size: 1rem
+p,
+input {
+    font-family: cursive, "Tanha" !important;
+    font-size: 1rem;
 }

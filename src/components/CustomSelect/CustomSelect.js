@@ -46,22 +46,17 @@ const CustomSelect = (props) => {
   };
 
   return (
-    <div
-      className={styles.container}
-      style={props.name === "theme" ? { right: "8px" } : { left: "8px" }}
-    >
-      <form>
-        <Select
-          {...props}
-          isSearchable={false}
-          value={props.options.filter(
-            (option) => option.value === localStorage.getItem(props.name)
-          )}
-          styles={customStyles}
-          menuPlacement="top"
-        />
-      </form>
-    </div>
+    <form className={styles.CustomSelect}>
+      <Select
+        {...props}
+        isSearchable={false}
+        value={props.options.filter(
+          (option) => option.value === localStorage.getItem(props.name)
+        )}
+        styles={customStyles}
+        menuPlacement="top"
+      />
+    </form>
   );
 };
 
