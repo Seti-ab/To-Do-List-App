@@ -72,8 +72,7 @@ const ToDoList = ({ locale }) => {
       });
       setNewTask("");
       setError({ ...error, show: false });
-    }
-    if (newTask.length < 3) {
+    } else if (newTask.length < 3) {
       setError({ show: true, message: "input_must_be_at_least_3_characters" });
     } else if (newTask.length > 250) {
       setError({
@@ -138,6 +137,8 @@ const ToDoList = ({ locale }) => {
                   task={task}
                   dispatch={dispatch}
                   key={task.id}
+                  error={error}
+                  setError={setError}
                   index={locale === "fa" ? toFarsiNumber(index + 1) : index + 1}
                 />
               )
@@ -149,6 +150,8 @@ const ToDoList = ({ locale }) => {
                   task={task}
                   dispatch={dispatch}
                   key={task.id}
+                  error={error}
+                  setError={setError}
                   index={locale === "fa" ? toFarsiNumber(index + 1) : index + 1}
                 />
               )

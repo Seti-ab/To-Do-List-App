@@ -11,19 +11,34 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Task = ({ task, dispatch, index }) => {
+const Task = ({ task, dispatch, index, error, setError }) => {
   const [editMode, setEditMode] = useState(false);
   const [editedTitle, setEditedTitle] = useState(task.title);
   const newRef = useRef(null);
 
-  const handleEditConfirm = () => {
-    dispatch({ type: "edit", payload: { title: editedTitle, id: task.id } });
-    setEditMode(false);
+  const isValid = editedTitle.length >= 3 && editedTitle.length <= 255;
+  const handleEditConfirm = (e) => {
+    e.preventDefault();
+    if (isValid) {
+      dispatch({ type: "edit", payload: { title: editedTitle, id: task.id } });
+      setEditMode(false);
+    }
+    if (editedTitle.length < 3) {
+      setError({ show: true, message: "input_must_be_at_least_3_characters" });
+    } else if (editedTitle.length > 250) {
+      setError({
+        show: true,
+        message: "input_cant_be_more_than_250_characters",
+      });
+    } else {
+      setError({ ...error, show: false });
+    }
   };
 
   const handleOutsideClick = (e) => {
     if (newRef.current && !newRef.current.contains(e.target)) {
       setEditMode(false);
+      setError({ ...error, show: false });
     }
   };
 
@@ -36,6 +51,7 @@ const Task = ({ task, dispatch, index }) => {
 
   const handleUndoEdit = () => {
     setEditedTitle(task.title);
+    setError({ ...error, show: false });
   };
 
   return (
@@ -45,7 +61,6 @@ const Task = ({ task, dispatch, index }) => {
     >
       {editMode === false ? (
         <>
-
           <div className={styles.title} onClick={() => setEditMode(true)}>
             <span>{index}.</span>
             <p>{task?.title}</p>
