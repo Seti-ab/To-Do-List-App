@@ -130,32 +130,18 @@ const ToDoList = ({ locale }) => {
           {t(error.message)}
         </p>
         <ul className={styles.list}>
-          {tasks?.map(
-            (task, index) =>
-              task.done === false && (
-                <Task
-                  task={task}
-                  dispatch={dispatch}
-                  key={task.id}
-                  error={error}
-                  setError={setError}
-                  index={locale === "fa" ? toFarsiNumber(index + 1) : index + 1}
-                />
-              )
-          )}
-          {tasks?.map(
-            (task, index) =>
-              task.done === true && (
-                <Task
-                  task={task}
-                  dispatch={dispatch}
-                  key={task.id}
-                  error={error}
-                  setError={setError}
-                  index={locale === "fa" ? toFarsiNumber(index + 1) : index + 1}
-                />
-              )
-          )}
+          {tasks
+            ?.sort((x, y) => (x.done === y.done ? 0 : x.done ? 1 : -1))
+            .map((task, index) => (
+              <Task
+                task={task}
+                dispatch={dispatch}
+                key={task.id}
+                error={error}
+                setError={setError}
+                index={locale === "fa" ? toFarsiNumber(index + 1) : index + 1}
+              />
+            ))}
         </ul>
       </div>
     </>
