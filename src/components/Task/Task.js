@@ -47,7 +47,7 @@ const Task = ({ task, dispatch, index, error, setError }) => {
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
-  });
+  },[]);
 
   const handleUndoEdit = () => {
     setEditedTitle(task.title);
