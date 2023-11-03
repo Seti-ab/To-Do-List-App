@@ -90,13 +90,14 @@
   ul > li > div {
     >span{
       font-size: 1.1rem;
+      height: 28px;
     }
     > p {
       text-align: right !important;
     }
     form {
       input {
-        padding: 6px 8px 6px 30px !important;
+        padding: 2px 8px 2px 30px !important;
       }
       button {
         right: unset !important;

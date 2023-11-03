@@ -1,15 +1,14 @@
 @font-face {
   font-family: PlaypenSans;
-  src: url('./assets/fonts/PlaypenSans-Regular.ttf') format('truetype');
+  src: url("./assets/fonts/PlaypenSans-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: DigiSarvenaz;
-  src: url('./assets/fonts/Digi Sarvenaz.ttf') format('truetype');
+  src: url("./assets/fonts/Digi Sarvenaz.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
-  size-adjust: 105%;
 }
 body {
   margin: 0;
@@ -23,5 +22,6 @@ body {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: "PlaypenSans","DigiSarvenaz" ;
+  font-family: "PlaypenSans", "DigiSarvenaz";
 }
+
