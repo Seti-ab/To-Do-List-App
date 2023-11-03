@@ -15,7 +15,21 @@
     margin-right: 2px;
     background: linear-gradient(90deg, var(--primary_color), var(--secondary_color));
   }
-
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(2rem);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .menu {
+    animation: fadeIn 0.2s ease-in-out;
+  }
+  
   .default {
     background: linear-gradient(90deg, rgba(54, 48, 98, 1) 0%, rgba(31, 65, 114, 1) 40%, rgba(255, 173, 72, 1) 98%);
   }

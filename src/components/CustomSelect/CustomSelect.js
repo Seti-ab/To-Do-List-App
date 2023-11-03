@@ -1,5 +1,5 @@
 import React from "react";
-import Select from "react-select";
+import Select, { components } from "react-select";
 import styles from "./CustomSelect.module.scss";
 
 const CustomSelect = (props) => {
@@ -55,6 +55,11 @@ const CustomSelect = (props) => {
         )}
         styles={customStyles}
         menuPlacement="top"
+        components={{
+          Menu: (props) => (
+            <components.Menu {...props} className={styles.menu} />
+          ),
+        }}
       />
     </form>
   );
