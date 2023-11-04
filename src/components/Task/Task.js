@@ -37,18 +37,19 @@ const Task = ({ task, dispatch, index, error, setError }) => {
     }
   };
 
-  const handleOutsideClick = (e) => {
-    if (newRef.current && !newRef.current.contains(e.target)) {
-      setEditMode(false);
-      setError({ ...error, show: false });
-    }
-  };
-
   useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (newRef.current && !newRef.current.contains(e.target)) {
+        setEditMode(false);
+        setError({ ...error, show: false });
+      }
+    };
+
     document.addEventListener("mousedown", handleOutsideClick);
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
+
   }, []);
 
   const handleUndoEdit = () => {
