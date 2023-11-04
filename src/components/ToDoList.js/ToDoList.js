@@ -2,9 +2,10 @@ import React, { useEffect, useReducer, useState } from "react";
 import styles from "./ToDoList.module.scss";
 import Task from "../Task/Task";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faDownload, faPlus } from "@fortawesome/free-solid-svg-icons";
 import toFarsiNumber from "../../utils/toFarsiNumber";
 import { useTranslation } from "react-i18next";
+import { saveAs } from 'file-saver';
 
 const ToDoList = ({ locale }) => {
   const { t } = useTranslation("");
@@ -88,8 +89,19 @@ const ToDoList = ({ locale }) => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
+  const handleSaveAsFile = () => {
+    const savingFormat = tasks.map((task, index) => {
+      return `${(locale === "fa" ? toFarsiNumber(index + 1) : index + 1)} . ${task.title}\n`
+    })
+    const file = new Blob(savingFormat, { type: 'text/plain;charset=utf-8' });
+    saveAs(file, 'myTasks.txt');
+  }
+
   return (
     <>
+      <button className={styles.saveButton} onClick={handleSaveAsFile}>
+        <FontAwesomeIcon icon={faDownload} />
+      </button>
       <div
         className={styles.background}
         onClick={() => setError({ ...error, show: false })}
@@ -144,6 +156,7 @@ const ToDoList = ({ locale }) => {
             ))}
         </ul>
       </div>
+
     </>
   );
 };
