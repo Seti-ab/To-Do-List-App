@@ -22,7 +22,7 @@
         border: 1px solid var(--tertiary_color);
         color: var(--tertiary_color);
         box-shadow: 0 0 0 0 var(--tertiary_color);
-        font-family: cursive;
+        font-family: "PlaypenSans";
         transition: box-shadow 0.5s;
         &:focus,
         &:hover {
@@ -65,13 +65,13 @@
   .list {
     display: flex;
     flex-direction: column;
-    margin-top: 1.5rem;
+    margin: 1.5rem auto 3.5rem auto;
     gap: 1.2rem;
   }
 }
 .farsiToDoListContainer {
   direction: rtl;
-  font-family: cursive, "Tanha";
+  font-family: "PlaypenSans", "DigiSarvenaz";
   form {
     label {
       input {
@@ -88,12 +88,16 @@
     }
   }
   ul > li > div {
+    >span{
+      font-size: 1.1rem;
+      height: 28px;
+    }
     > p {
       text-align: right !important;
     }
     form {
       input {
-        padding: 6px 8px 6px 30px !important;
+        padding: 2px 8px 2px 30px !important;
       }
       button {
         right: unset !important;
@@ -123,7 +127,7 @@
   position: absolute;
   text-align: left;
   font-size: 0.7rem;
-  padding-top: 3px;
+  padding-top: 2px;
   color: var(--error_color);
   transition: opacity 0.2s ease-in;
 }
@@ -138,7 +142,8 @@
 
 .background {
   width: 100%;
-  height: 100%;
+  height: 102%;
   z-index: 0;
   position: absolute;
+  background-color: var(--primary_color);
 }
