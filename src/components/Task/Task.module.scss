@@ -8,7 +8,8 @@
   align-items: flex-end;
   justify-content: space-between;
   gap: 8px;
-  transition: box-shadow 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
   &:hover {
     cursor: pointer;
     transition: box-shadow 0.2s ease-in-out;
@@ -24,6 +25,7 @@
       }
     }
   }
+  
   .title {
     display: flex;
     align-items: baseline;
@@ -124,6 +126,10 @@
   span {
     color: var(--secondary_color);
   }
+}
+.taskDeleted{
+  opacity: 0;
+  transition: all 0.3s ease-in-out !important;
 }
 @media screen and (max-width: 480px) {
   .task {

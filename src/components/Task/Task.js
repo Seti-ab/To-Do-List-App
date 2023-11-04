@@ -14,6 +14,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Task = ({ task, dispatch, index, error, setError }) => {
   const [editMode, setEditMode] = useState(false);
   const [editedTitle, setEditedTitle] = useState(task.title);
+  const [deleted, setDeleted] = useState();
+
   const newRef = useRef(null);
 
   const isValid = editedTitle.length >= 3 && editedTitle.length <= 255;
@@ -47,16 +49,22 @@ const Task = ({ task, dispatch, index, error, setError }) => {
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
-  },[]);
+  }, []);
 
   const handleUndoEdit = () => {
     setEditedTitle(task.title);
     setError({ ...error, show: false });
   };
+  const handleTaskDelete = () => {
+    setDeleted(true);
+    setTimeout(() => {
+      dispatch({ type: "delete", payload: { id: task.id } })
+    }, [1000])
 
+  }
   return (
     <li
-      className={styles.task + " " + (task.done ? styles.taskDone : "")}
+      className={styles.task + " " + (task.done ? styles.taskDone : "") + " " + (deleted ? styles.taskDeleted : "")}
       ref={newRef}
     >
       {editMode === false ? (
@@ -80,11 +88,7 @@ const Task = ({ task, dispatch, index, error, setError }) => {
             <button onClick={() => setEditMode(true)}>
               <FontAwesomeIcon icon={faPenToSquare} />
             </button>
-            <button
-              onClick={() =>
-                dispatch({ type: "delete", payload: { id: task.id } })
-              }
-            >
+            <button onClick={handleTaskDelete}>
               <FontAwesomeIcon icon={faTrash} />
             </button>
           </div>
