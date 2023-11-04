@@ -99,7 +99,7 @@ const ToDoList = ({ locale }) => {
 
   return (
     <>
-      <button className={styles.saveButton} onClick={handleSaveAsFile}>
+      <button title="Save as txt" className={styles.saveButton} onClick={handleSaveAsFile}>
         <FontAwesomeIcon icon={faDownload} />
       </button>
       <div
