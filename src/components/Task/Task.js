@@ -60,7 +60,7 @@ const Task = ({ task, dispatch, index, error, setError }) => {
     setDeleted(true);
     setTimeout(() => {
       dispatch({ type: "delete", payload: { id: task.id } })
-    }, [1000])
+    }, [300])
 
   }
   return (
