@@ -148,28 +148,13 @@
   background-color: var(--primary_color);
 }
 
-.saveButton {
+.importExportContainer{
   z-index: 5;
   position: fixed;
-  right: 8px;
-  top: 8px;
-  cursor: pointer;
-  border: none;
-  background-color: transparent;
-  width: 30px;
-  height: 30px;
-  border-radius: 6px;
-  transition: all 0.5s;
+  top: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
-  svg {
-    color: var(--secondary_color);
-    font-size: 1rem;
-    transition: all 0.2s ease-in-out;
-  }
-  &:hover {
-    background-color: var(--light_primary_color);
-    transition: all 0.2s;
-  }
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px;
 }

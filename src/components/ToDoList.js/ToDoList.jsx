@@ -2,10 +2,13 @@ import React, { useEffect, useReducer, useState } from "react";
 import styles from "./ToDoList.module.scss";
 import Task from "../Task/Task";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDownload, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import toFarsiNumber from "../../utils/toFarsiNumber";
 import { useTranslation } from "react-i18next";
-import { saveAs } from 'file-saver';
+import { saveAs } from "file-saver";
+import Modal from "../Modal/Modal";
+import ImportButton from "../ImportButton/ImportButton";
+import ExportButton from "../ExportButton/ExportButton";
 
 const ToDoList = ({ locale }) => {
   const { t } = useTranslation("");
@@ -16,7 +19,7 @@ const ToDoList = ({ locale }) => {
         return [
           ...tasks,
           {
-            id: Date.now(),
+            id: Date.now() + "-" + action.payload.title,
             title: action.payload.title,
             done: false,
           },
@@ -55,6 +58,8 @@ const ToDoList = ({ locale }) => {
     show: false,
     message: "",
   });
+  const [showConfirmImportModal, setShowConfirmImportModal] = useState(false);
+  const [importedtasks, setImportedtasks] = useState([]);
 
   const handleNewTaskAdd = (e) => {
     setNewTask(e.target.value);
@@ -89,19 +94,49 @@ const ToDoList = ({ locale }) => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
-  const handleSaveAsFile = () => {
+  //export tasks to a .txt file
+  const handleExportToFile = () => {
     const savingFormat = tasks.map((task, index) => {
-      return `${(locale === "fa" ? toFarsiNumber(index + 1) : index + 1)} . ${task.title}\n`
-    })
-    const file = new Blob(savingFormat, { type: 'text/plain;charset=utf-8' });
-    saveAs(file, 'myTasks.txt');
-  }
+      return `${locale === "fa" ? toFarsiNumber(index + 1) : index + 1} . ${
+        task.title
+      }\n`;
+    });
+    const file = new Blob(savingFormat, { type: "text/plain;charset=utf-8" });
+    saveAs(file, "myTasks.txt");
+  };
+
+  //import tasks from a .txt file
+  const handleImportFromFile = async (e) => {
+    e.preventDefault();
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      const text = e.target.result;
+      console.log(text.split("\n"));
+      let temp = text.split("\n").map((string) => {
+        let taskTitle = string.replace(/[0-9]{1,2} {0,1}. {0,1}/g, "");
+        return taskTitle;
+      });
+      //remove empty element
+      setImportedtasks(temp.filter((t) => t));
+    };
+    reader.readAsText(e.target.files[0]);
+    setShowConfirmImportModal(true);
+  };
+
+  const handleConfirmImport = () => {
+    importedtasks.forEach((task) => {
+      dispatch({ type: "add", payload: { title: task } });
+    });
+    setShowConfirmImportModal(false);
+  };
 
   return (
     <>
-      <button title="Save as txt" className={styles.saveButton} onClick={handleSaveAsFile}>
-        <FontAwesomeIcon icon={faDownload} />
-      </button>
+      <div className={styles.importExportContainer}>
+        <ImportButton handleChange={handleImportFromFile} />
+        <ExportButton handleClick={handleExportToFile}/>
+      </div>
+
       <div
         className={styles.background}
         onClick={() => setError({ ...error, show: false })}
@@ -115,6 +150,13 @@ const ToDoList = ({ locale }) => {
           (error.show ? styles.errorBox : "")
         }
       >
+        <Modal
+          show={showConfirmImportModal}
+          handleClose={() => setShowConfirmImportModal(false)}
+          text="Are you sure you want to import tasks from this file?"
+          handleConfirm={() => handleConfirmImport()}
+          actions
+        />
         <form onSubmit={handleSubmit}>
           <h1>{t("to_do_list")}</h1>
           <label>
@@ -156,7 +198,6 @@ const ToDoList = ({ locale }) => {
             ))}
         </ul>
       </div>
-
     </>
   );
 };
