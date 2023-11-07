@@ -11,8 +11,6 @@ import ImportButton from "../ImportButton/ImportButton";
 import ExportButton from "../ExportButton/ExportButton";
 
 const ToDoList = ({ locale }) => {
-  const { t } = useTranslation("");
-  const importFileRef = useRef(null);
   const reducer = (tasks, action) => {
     switch (action.type) {
       case "add":
@@ -51,6 +49,7 @@ const ToDoList = ({ locale }) => {
         return tasks;
     }
   };
+  //states and other hooks
   const initialTasks = JSON.parse(localStorage.getItem("tasks") || null);
   const [tasks, dispatch] = useReducer(reducer, initialTasks || []);
   const [newTask, setNewTask] = useState("");
@@ -60,7 +59,10 @@ const ToDoList = ({ locale }) => {
   });
   const [showConfirmImportModal, setShowConfirmImportModal] = useState(false);
   const [importedtasks, setImportedtasks] = useState([]);
+  const { t } = useTranslation("");
+  const importFileRef = useRef(null);
 
+  //functions
   const handleNewTaskAdd = (e) => {
     setNewTask(e.target.value);
     setError({ ...error, show: false });
@@ -126,7 +128,7 @@ const ToDoList = ({ locale }) => {
     setShowConfirmImportModal(false);
     handleClearImportedFile();
   };
-  
+
   const handleConfirmImport = () => {
     importedtasks.forEach((task) => {
       dispatch({ type: "add", payload: { title: task } });
@@ -165,11 +167,12 @@ const ToDoList = ({ locale }) => {
           " " +
           (error.show ? styles.errorBox : "")
         }
+        style={showConfirmImportModal ? { zIndex: 5 } : {}}
       >
         <Modal
           show={showConfirmImportModal}
-          handleClose={() => handleModalClose()}
           text="Are you sure you want to import tasks from this file?"
+          handleClose={() => handleModalClose()}
           handleConfirm={() => handleConfirmImport()}
           actions
         />
