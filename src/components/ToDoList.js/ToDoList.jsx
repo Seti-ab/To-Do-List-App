@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useReducer, useRef, useState } from "react";
 import styles from "./ToDoList.module.scss";
 import Task from "../Task/Task";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,7 +12,7 @@ import ExportButton from "../ExportButton/ExportButton";
 
 const ToDoList = ({ locale }) => {
   const { t } = useTranslation("");
-
+  const importFileRef = useRef(null);
   const reducer = (tasks, action) => {
     switch (action.type) {
       case "add":
@@ -111,7 +111,6 @@ const ToDoList = ({ locale }) => {
     const reader = new FileReader();
     reader.onload = async (e) => {
       const text = e.target.result;
-      console.log(text.split("\n"));
       let temp = text.split("\n").map((string) => {
         let taskTitle = string.replace(/[0-9]{1,2} {0,1}. {0,1}/g, "");
         return taskTitle;
@@ -123,18 +122,35 @@ const ToDoList = ({ locale }) => {
     setShowConfirmImportModal(true);
   };
 
+  const handleModalClose = () => {
+    setShowConfirmImportModal(false);
+    handleClearImportedFile();
+  };
+  
   const handleConfirmImport = () => {
     importedtasks.forEach((task) => {
       dispatch({ type: "add", payload: { title: task } });
     });
     setShowConfirmImportModal(false);
+    setImportedtasks([]);
+    handleClearImportedFile();
   };
 
+  const handleClearImportedFile = () => {
+    if (importFileRef.current) {
+      importFileRef.current.value = "";
+      importFileRef.current.type = "text";
+      importFileRef.current.type = "file";
+    }
+  };
   return (
     <>
       <div className={styles.importExportContainer}>
-        <ImportButton handleChange={handleImportFromFile} />
-        <ExportButton handleClick={handleExportToFile}/>
+        <ImportButton
+          handleChange={handleImportFromFile}
+          importFileRef={importFileRef}
+        />
+        <ExportButton handleClick={handleExportToFile} />
       </div>
 
       <div
@@ -152,7 +168,7 @@ const ToDoList = ({ locale }) => {
       >
         <Modal
           show={showConfirmImportModal}
-          handleClose={() => setShowConfirmImportModal(false)}
+          handleClose={() => handleModalClose()}
           text="Are you sure you want to import tasks from this file?"
           handleConfirm={() => handleConfirmImport()}
           actions
