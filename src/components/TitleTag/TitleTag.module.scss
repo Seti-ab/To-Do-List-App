@@ -1,0 +1,28 @@
+.TitleTagContainer {
+    width: fit-content;
+    position: absolute;
+    background-color: var(--light_primary_color);
+    border-radius: 6px;
+    padding: 6px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    span {
+        font-size: 0.7rem;
+    }
+}
+.showRight {
+    opacity: 1;
+    right: 46px;
+    transition: all 0.2s ease-in-out;
+}
+.showLeft {
+    opacity: 1;
+    left: 46px;
+    transition: all 0.2s ease-in-out;
+}
+.hide {
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+    left: 40px;
+}
