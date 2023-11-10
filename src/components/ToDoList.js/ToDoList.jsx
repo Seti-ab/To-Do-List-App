@@ -7,8 +7,7 @@ import toFarsiNumber from "../../utils/toFarsiNumber";
 import { useTranslation } from "react-i18next";
 import { saveAs } from "file-saver";
 import Modal from "../Modal/Modal";
-import ImportButton from "../ImportButton/ImportButton";
-import ExportButton from "../ExportButton/ExportButton";
+import ImportExport from "../ImportExport/ImportExport";
 
 const ToDoList = ({ locale }) => {
   const reducer = (tasks, action) => {
@@ -147,12 +146,13 @@ const ToDoList = ({ locale }) => {
   };
   return (
     <>
-      <div className={styles.importExportContainer}>
-        <ImportButton
-          handleChange={handleImportFromFile}
-          importFileRef={importFileRef}
-        />
-        <ExportButton handleClick={handleExportToFile} />
+      <div className={styles.topBarContainer}>
+          <ImportExport
+            type="Import"
+            handleChange={handleImportFromFile}
+            importFileRef={importFileRef}
+          />
+          <ImportExport type="Export" handleClick={handleExportToFile} />
       </div>
 
       <div

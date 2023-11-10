@@ -1,16 +1,15 @@
 import React from "react";
 import styles from "./TitleTag.module.scss";
 
-const TitleTag = ({ text, show, direction }) => {
-  const selectStyles = () => {
-    switch(show){
-      case true:
-        
-    }
-  };
-  console.log("check",selectStyles())
+const TitleTag = ({ text, show }) => {
   return (
-    <div className={styles.TitleTagContainer + " " + styles[selectStyles()]}>
+    <div
+      className={
+        styles.TitleTagContainer +
+        " " +
+        (show ? styles.showTitleTag : styles.hideTitleTag)
+      }
+    >
       <span>{text}</span>
     </div>
   );
