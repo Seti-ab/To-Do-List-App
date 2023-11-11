@@ -10,8 +10,11 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import TitledButton from "../TitledButton/TitledButton";
+import { useTranslation } from "react-i18next";
 
 const Task = ({ task, dispatch, index, error, setError }) => {
+  const { t } = useTranslation();
   const [editMode, setEditMode] = useState(false);
   const [editedTitle, setEditedTitle] = useState(task.title);
   const [deleted, setDeleted] = useState();
@@ -49,7 +52,6 @@ const Task = ({ task, dispatch, index, error, setError }) => {
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
-
   }, []);
 
   const handleUndoEdit = () => {
@@ -59,13 +61,18 @@ const Task = ({ task, dispatch, index, error, setError }) => {
   const handleTaskDelete = () => {
     setDeleted(true);
     setTimeout(() => {
-      dispatch({ type: "delete", payload: { id: task.id } })
-    }, [300])
-
-  }
+      dispatch({ type: "delete", payload: { id: task.id } });
+    }, [300]);
+  };
   return (
     <li
-      className={styles.task + " " + (task.done ? styles.taskDone : "") + " " + (deleted ? styles.taskDeleted : "")}
+      className={
+        styles.task +
+        " " +
+        (task.done ? styles.taskDone : "") +
+        " " +
+        (deleted ? styles.taskDeleted : "")
+      }
       ref={newRef}
     >
       {editMode === false ? (
@@ -75,23 +82,29 @@ const Task = ({ task, dispatch, index, error, setError }) => {
             <p>{task?.title}</p>
           </div>
           <div className={styles.actions}>
-            <button
-              onClick={() =>
-                dispatch({ type: "toggle", payload: { id: task?.id } })
-              }
-            >
-              {task.done === false ? (
-                <FontAwesomeIcon icon={faSquareCheck} />
-              ) : (
-                <FontAwesomeIcon icon={faSquareMinus} />
-              )}
-            </button>
-            <button onClick={() => setEditMode(true)}>
-              <FontAwesomeIcon icon={faPenToSquare} />
-            </button>
-            <button onClick={handleTaskDelete}>
-              <FontAwesomeIcon icon={faTrash} />
-            </button>
+            <TitledButton text={task.done ? t("undone") : t("done")}>
+              <button
+                onClick={() =>
+                  dispatch({ type: "toggle", payload: { id: task.id } })
+                }
+              >
+                {task.done === false ? (
+                  <FontAwesomeIcon icon={faSquareCheck} />
+                ) : (
+                  <FontAwesomeIcon icon={faSquareMinus} />
+                )}
+              </button>
+            </TitledButton>
+            <TitledButton text={t("edit")}>
+              <button onClick={() => setEditMode(true)}>
+                <FontAwesomeIcon icon={faPenToSquare} />
+              </button>
+            </TitledButton>
+            <TitledButton text={t("delete")}>
+              <button onClick={handleTaskDelete}>
+                <FontAwesomeIcon icon={faTrash} />
+              </button>
+            </TitledButton>
           </div>
         </>
       ) : (
@@ -116,12 +129,16 @@ const Task = ({ task, dispatch, index, error, setError }) => {
             </form>
           </div>
           <div className={styles.actions + " " + styles.editingButtons}>
-            <button type="submit" onClick={handleEditConfirm}>
-              <FontAwesomeIcon icon={faCheck} />
-            </button>
-            <button onClick={() => setEditMode(false)}>
-              <FontAwesomeIcon icon={faXmark} />
-            </button>
+            <TitledButton text={t("confirm")}>
+              <button type="submit" onClick={handleEditConfirm}>
+                <FontAwesomeIcon icon={faCheck} />
+              </button>
+            </TitledButton>
+            <TitledButton text={t("cancel")}>
+              <button onClick={() => setEditMode(false)}>
+                <FontAwesomeIcon icon={faXmark} />
+              </button>
+            </TitledButton>
           </div>
         </>
       )}

@@ -10,7 +10,7 @@ const TitleTag = ({ text, show }) => {
         (show ? styles.showTitleTag : styles.hideTitleTag)
       }
     >
-      <span>{text}</span>
+      <p>{text}</p>
     </div>
   );
 };

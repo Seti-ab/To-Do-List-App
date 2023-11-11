@@ -10,5 +10,9 @@
   "confirm":"Confirm",
   "cancel":"Cancel",
   "export":"Export",
-  "import":"Import"
+  "import":"Import",
+  "done":"Done",
+  "undone":"Undone",
+  "edit":"Edit",
+  "delete":"Delete"
 }
