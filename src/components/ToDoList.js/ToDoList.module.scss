@@ -148,7 +148,7 @@
   background-color: var(--primary_color);
 }
 
-.importExportContainer{
+.topBarContainer{
   z-index: 5;
   position: fixed;
   top: 0;
@@ -157,4 +157,5 @@
   justify-content: space-between;
   width: 100%;
   padding: 8px;
+
 }

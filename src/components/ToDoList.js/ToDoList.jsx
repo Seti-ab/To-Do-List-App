@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useReducer, useRef, useState } from "react";
 import styles from "./ToDoList.module.scss";
 import Task from "../Task/Task";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,12 +7,11 @@ import toFarsiNumber from "../../utils/toFarsiNumber";
 import { useTranslation } from "react-i18next";
 import { saveAs } from "file-saver";
 import Modal from "../Modal/Modal";
-import ImportButton from "../ImportButton/ImportButton";
-import ExportButton from "../ExportButton/ExportButton";
+import ImportButton from "../ImportExport/ImportButton";
+import ExportButton from "../ImportExport/ExportButton";
+import TitledButton from "../TitledButton/TitledButton";
 
 const ToDoList = ({ locale }) => {
-  const { t } = useTranslation("");
-
   const reducer = (tasks, action) => {
     switch (action.type) {
       case "add":
@@ -21,7 +20,7 @@ const ToDoList = ({ locale }) => {
           {
             id: Date.now() + "-" + action.payload.title,
             title: action.payload.title,
-            done: false,
+            done: action.payload.done | false,
           },
         ];
       case "toggle":
@@ -51,6 +50,7 @@ const ToDoList = ({ locale }) => {
         return tasks;
     }
   };
+  //states and other hooks
   const initialTasks = JSON.parse(localStorage.getItem("tasks") || null);
   const [tasks, dispatch] = useReducer(reducer, initialTasks || []);
   const [newTask, setNewTask] = useState("");
@@ -60,7 +60,10 @@ const ToDoList = ({ locale }) => {
   });
   const [showConfirmImportModal, setShowConfirmImportModal] = useState(false);
   const [importedtasks, setImportedtasks] = useState([]);
+  const { t } = useTranslation("");
+  const importFileRef = useRef(null);
 
+  //functions
   const handleNewTaskAdd = (e) => {
     setNewTask(e.target.value);
     setError({ ...error, show: false });
@@ -97,9 +100,9 @@ const ToDoList = ({ locale }) => {
   //export tasks to a .txt file
   const handleExportToFile = () => {
     const savingFormat = tasks.map((task, index) => {
-      return `${locale === "fa" ? toFarsiNumber(index + 1) : index + 1} . ${
-        task.title
-      }\n`;
+      return `${task.done ? "✓" : ""}${
+        locale === "fa" ? toFarsiNumber(index + 1) : index + 1
+      } . ${task.title}\n`;
     });
     const file = new Blob(savingFormat, { type: "text/plain;charset=utf-8" });
     saveAs(file, "myTasks.txt");
@@ -111,30 +114,57 @@ const ToDoList = ({ locale }) => {
     const reader = new FileReader();
     reader.onload = async (e) => {
       const text = e.target.result;
-      console.log(text.split("\n"));
       let temp = text.split("\n").map((string) => {
-        let taskTitle = string.replace(/[0-9]{1,2} {0,1}. {0,1}/g, "");
-        return taskTitle;
+        let tempTask = {};
+        if (string.charAt(0) === "✓") {
+          tempTask.done = true;
+        }
+        tempTask.title = string.replace(/✓|[\u06F0-\u06F90-9]|[0-9]{1,2}| {0,}\. {0,}/g, "");
+        return tempTask;
       });
       //remove empty element
-      setImportedtasks(temp.filter((t) => t));
+      setImportedtasks(temp.filter((t) => t.title));
     };
     reader.readAsText(e.target.files[0]);
     setShowConfirmImportModal(true);
   };
 
-  const handleConfirmImport = () => {
-    importedtasks.forEach((task) => {
-      dispatch({ type: "add", payload: { title: task } });
-    });
+  const handleModalClose = () => {
     setShowConfirmImportModal(false);
+    handleClearImportedFile();
   };
 
+  const handleConfirmImport = () => {
+    importedtasks.forEach((task) => {
+      dispatch({
+        type: "add",
+        payload: { title: task.title, done: task.done },
+      });
+    });
+    setShowConfirmImportModal(false);
+    setImportedtasks([]);
+    handleClearImportedFile();
+  };
+
+  const handleClearImportedFile = () => {
+    if (importFileRef.current) {
+      importFileRef.current.value = "";
+      importFileRef.current.type = "text";
+      importFileRef.current.type = "file";
+    }
+  };
   return (
     <>
-      <div className={styles.importExportContainer}>
-        <ImportButton handleChange={handleImportFromFile} />
-        <ExportButton handleClick={handleExportToFile}/>
+      <div className={styles.topBarContainer}>
+        <TitledButton text={t("import")}>
+          <ImportButton
+            handleChange={handleImportFromFile}
+            importFileRef={importFileRef}
+          />
+        </TitledButton>
+        <TitledButton text={t("export")}>
+          <ExportButton handleClick={handleExportToFile} />
+        </TitledButton>
       </div>
 
       <div
@@ -149,11 +179,12 @@ const ToDoList = ({ locale }) => {
           " " +
           (error.show ? styles.errorBox : "")
         }
+        style={showConfirmImportModal ? { zIndex: 5 } : {}}
       >
         <Modal
           show={showConfirmImportModal}
-          handleClose={() => setShowConfirmImportModal(false)}
-          text="Are you sure you want to import tasks from this file?"
+          text={t("import_file_confiramation")}
+          handleClose={() => handleModalClose()}
           handleConfirm={() => handleConfirmImport()}
           actions
         />

@@ -5,5 +5,10 @@
   "input_cant_be_more_than_250_characters": "Input can't be more than 250 characters.",
   "default": "Default",
   "dark": "Dark",
-  "light": "Light"
+  "light": "Light",
+  "import_file_confiramation":"Are you sure you want to import to-do list from this file?",
+  "confirm":"Confirm",
+  "cancel":"Cancel",
+  "export":"Export",
+  "import":"Import"
 }

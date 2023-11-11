@@ -1,7 +1,7 @@
 .backdrop {
     width: 100vw;
     height: 100vh;
-    background-color: rgba($color: #000000, $alpha: 0.5);
+    background-color: rgba($color: #000000, $alpha: 0.7);
     position: fixed;
     inset: 0 0 0 0;
     z-index: 5;
@@ -101,7 +101,7 @@
     }
     .modalContainer .modal {
         opacity: 0;
-        transition: all 0.3s;
+        transition: all 0.2s;
         position: relative;
         bottom: -20px;
     }
