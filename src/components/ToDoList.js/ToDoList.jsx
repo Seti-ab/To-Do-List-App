@@ -149,13 +149,13 @@ const ToDoList = ({ locale }) => {
   return (
     <>
       <div className={styles.topBarContainer}>
-        <TitledButton text="Import">
+        <TitledButton text={t("import")}>
           <ImportButton
             handleChange={handleImportFromFile}
             importFileRef={importFileRef}
           />
         </TitledButton>
-        <TitledButton text="Export">
+        <TitledButton text={t("export")}>
           <ExportButton handleClick={handleExportToFile} />
         </TitledButton>
       </div>
