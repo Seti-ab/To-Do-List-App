@@ -7,7 +7,9 @@ import toFarsiNumber from "../../utils/toFarsiNumber";
 import { useTranslation } from "react-i18next";
 import { saveAs } from "file-saver";
 import Modal from "../Modal/Modal";
-import ImportExport from "../ImportExport/ImportExport";
+import ImportButton from "../ImportExport/ImportButton";
+import ExportButton from "../ImportExport/ExportButton";
+import TitledButton from "../TitledButton/TitledButton";
 
 const ToDoList = ({ locale }) => {
   const reducer = (tasks, action) => {
@@ -147,12 +149,15 @@ const ToDoList = ({ locale }) => {
   return (
     <>
       <div className={styles.topBarContainer}>
-          <ImportExport
-            type="Import"
+        <TitledButton text="Import">
+          <ImportButton
             handleChange={handleImportFromFile}
             importFileRef={importFileRef}
           />
-          <ImportExport type="Export" handleClick={handleExportToFile} />
+        </TitledButton>
+        <TitledButton text="Export">
+          <ExportButton handleClick={handleExportToFile} />
+        </TitledButton>
       </div>
 
       <div
@@ -171,7 +176,7 @@ const ToDoList = ({ locale }) => {
       >
         <Modal
           show={showConfirmImportModal}
-          text="Are you sure you want to import tasks from this file?"
+          text={t("import_file_confiramation")}
           handleClose={() => handleModalClose()}
           handleConfirm={() => handleConfirmImport()}
           actions

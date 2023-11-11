@@ -2,8 +2,10 @@ import React from "react";
 import styles from "./Modal.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from "react-i18next";
 
 const Modal = ({ show, handleClose, text, handleConfirm, actions }) => {
+  const { t } = useTranslation();
   return (
     <div className={show ? styles.showModal : styles.hideModal}>
       <div className={styles.modalContainer}>
@@ -19,10 +21,10 @@ const Modal = ({ show, handleClose, text, handleConfirm, actions }) => {
                   className={styles.confirmButton}
                   onClick={handleConfirm}
                 >
-                  Yes
+                  {t("confirm")}
                 </button>
                 <button className={styles.cancelButton} onClick={handleClose}>
-                  No
+                  {t("cancel")}
                 </button>
               </div>
             )}
