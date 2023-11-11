@@ -20,7 +20,7 @@ const ToDoList = ({ locale }) => {
           {
             id: Date.now() + "-" + action.payload.title,
             title: action.payload.title,
-            done: false,
+            done: action.payload.done | false,
           },
         ];
       case "toggle":
@@ -100,9 +100,9 @@ const ToDoList = ({ locale }) => {
   //export tasks to a .txt file
   const handleExportToFile = () => {
     const savingFormat = tasks.map((task, index) => {
-      return `${locale === "fa" ? toFarsiNumber(index + 1) : index + 1} . ${
-        task.title
-      }\n`;
+      return `${task.done ? "✓" : ""}${
+        locale === "fa" ? toFarsiNumber(index + 1) : index + 1
+      } . ${task.title}\n`;
     });
     const file = new Blob(savingFormat, { type: "text/plain;charset=utf-8" });
     saveAs(file, "myTasks.txt");
@@ -115,11 +115,15 @@ const ToDoList = ({ locale }) => {
     reader.onload = async (e) => {
       const text = e.target.result;
       let temp = text.split("\n").map((string) => {
-        let taskTitle = string.replace(/[0-9]{1,2} {0,1}. {0,1}/g, "");
-        return taskTitle;
+        let tempTask = {};
+        if (string.charAt(0) === "✓") {
+          tempTask.done = true;
+        }
+        tempTask.title = string.replace(/✓|[\u06F0-\u06F90-9]|[0-9]{1,2}| {0,}\. {0,}/g, "");
+        return tempTask;
       });
       //remove empty element
-      setImportedtasks(temp.filter((t) => t));
+      setImportedtasks(temp.filter((t) => t.title));
     };
     reader.readAsText(e.target.files[0]);
     setShowConfirmImportModal(true);
@@ -132,7 +136,10 @@ const ToDoList = ({ locale }) => {
 
   const handleConfirmImport = () => {
     importedtasks.forEach((task) => {
-      dispatch({ type: "add", payload: { title: task } });
+      dispatch({
+        type: "add",
+        payload: { title: task.title, done: task.done },
+      });
     });
     setShowConfirmImportModal(false);
     setImportedtasks([]);
