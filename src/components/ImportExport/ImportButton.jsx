@@ -3,14 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import styles from "./ImportExport.module.scss";
 
-const ImportButton = ({ handleChange, importFileRef }) => {
-
+const ImportButton = ({ handleChange, importFileRef, children }) => {
   return (
-    <div
-      className={styles.importExportContainer}
-    >
+    <div className={styles.importExportContainer}>
       <label htmlFor="file-input">
         <FontAwesomeIcon icon={faFileImport} />
+        {children}
       </label>
       <input
         ref={importFileRef}

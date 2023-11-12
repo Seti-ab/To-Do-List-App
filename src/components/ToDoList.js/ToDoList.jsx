@@ -9,7 +9,7 @@ import { saveAs } from "file-saver";
 import Modal from "../Modal/Modal";
 import ImportButton from "../ImportExport/ImportButton";
 import ExportButton from "../ImportExport/ExportButton";
-import TitledButton from "../TitledButton/TitledButton";
+import TitleTag from "../TitleTag/TitleTag";
 
 const ToDoList = ({ locale }) => {
   const reducer = (tasks, action) => {
@@ -119,7 +119,10 @@ const ToDoList = ({ locale }) => {
         if (string.charAt(0) === "✓") {
           tempTask.done = true;
         }
-        tempTask.title = string.replace(/✓|[\u06F0-\u06F90-9]|[0-9]{1,2}| {0,}\. {0,}/g, "");
+        tempTask.title = string.replace(
+          /✓|[\u06F0-\u06F90-9]|[0-9]{1,2}| {0,}\. {0,}/g,
+          ""
+        );
         return tempTask;
       });
       //remove empty element
@@ -156,15 +159,15 @@ const ToDoList = ({ locale }) => {
   return (
     <>
       <div className={styles.topBarContainer}>
-        <TitledButton text={t("import")}>
-          <ImportButton
-            handleChange={handleImportFromFile}
-            importFileRef={importFileRef}
-          />
-        </TitledButton>
-        <TitledButton text={t("export")}>
-          <ExportButton handleClick={handleExportToFile} />
-        </TitledButton>
+        <ImportButton
+          handleChange={handleImportFromFile}
+          importFileRef={importFileRef}
+        >
+          <TitleTag text={t("import")} />
+        </ImportButton>
+        <ExportButton handleClick={handleExportToFile}>
+          <TitleTag text={t("export")} />
+        </ExportButton>
       </div>
 
       <div

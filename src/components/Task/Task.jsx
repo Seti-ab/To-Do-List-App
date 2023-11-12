@@ -10,8 +10,8 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import TitledButton from "../TitledButton/TitledButton";
 import { useTranslation } from "react-i18next";
+import TitleTag from "../TitleTag/TitleTag";
 
 const Task = ({ task, dispatch, index, error, setError }) => {
   const { t } = useTranslation();
@@ -52,7 +52,7 @@ const Task = ({ task, dispatch, index, error, setError }) => {
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
-  }, []);
+  }, [error, setError]);
 
   const handleUndoEdit = () => {
     setEditedTitle(task.title);
@@ -82,29 +82,26 @@ const Task = ({ task, dispatch, index, error, setError }) => {
             <p>{task?.title}</p>
           </div>
           <div className={styles.actions}>
-            <TitledButton text={task.done ? t("undone") : t("done")}>
-              <button
-                onClick={() =>
-                  dispatch({ type: "toggle", payload: { id: task.id } })
-                }
-              >
-                {task.done === false ? (
-                  <FontAwesomeIcon icon={faSquareCheck} />
-                ) : (
-                  <FontAwesomeIcon icon={faSquareMinus} />
-                )}
-              </button>
-            </TitledButton>
-            <TitledButton text={t("edit")}>
-              <button onClick={() => setEditMode(true)}>
-                <FontAwesomeIcon icon={faPenToSquare} />
-              </button>
-            </TitledButton>
-            <TitledButton text={t("delete")}>
-              <button onClick={handleTaskDelete}>
-                <FontAwesomeIcon icon={faTrash} />
-              </button>
-            </TitledButton>
+            <button
+              onClick={() =>
+                dispatch({ type: "toggle", payload: { id: task.id } })
+              }
+            >
+              {task.done === false ? (
+                <FontAwesomeIcon icon={faSquareCheck} />
+              ) : (
+                <FontAwesomeIcon icon={faSquareMinus} />
+              )}
+              <TitleTag text={task.done ? t("undone") : t("done")} />
+            </button>
+            <button onClick={() => setEditMode(true)}>
+              <FontAwesomeIcon icon={faPenToSquare} />
+              <TitleTag text={t("edit")} />
+            </button>
+            <button onClick={handleTaskDelete}>
+              <FontAwesomeIcon icon={faTrash} />
+              <TitleTag text={t("delete")} />
+            </button>
           </div>
         </>
       ) : (
@@ -129,16 +126,14 @@ const Task = ({ task, dispatch, index, error, setError }) => {
             </form>
           </div>
           <div className={styles.actions + " " + styles.editingButtons}>
-            <TitledButton text={t("confirm")}>
-              <button type="submit" onClick={handleEditConfirm}>
-                <FontAwesomeIcon icon={faCheck} />
-              </button>
-            </TitledButton>
-            <TitledButton text={t("cancel")}>
-              <button onClick={() => setEditMode(false)}>
-                <FontAwesomeIcon icon={faXmark} />
-              </button>
-            </TitledButton>
+            <button type="submit" onClick={handleEditConfirm}>
+              <FontAwesomeIcon icon={faCheck} />
+              <TitleTag text={t("confirm")} />
+            </button>
+            <button onClick={() => setEditMode(false)}>
+              <FontAwesomeIcon icon={faXmark} />
+              <TitleTag text={t("cancel")} />
+            </button>
           </div>
         </>
       )}
