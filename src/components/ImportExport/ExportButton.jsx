@@ -3,12 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import styles from "./ImportExport.module.scss";
 
-const ExportButton = ({ handleClick }) => {
+const ExportButton = ({ handleClick, children }) => {
   return (
-    <div
-      className={styles.importExportContainer}>
+    <div className={styles.importExportContainer}>
       <button onClick={handleClick}>
         <FontAwesomeIcon icon={faFileExport} />
+      {children}
       </button>
     </div>
   );

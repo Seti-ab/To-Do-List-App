@@ -61,7 +61,7 @@
         width: 32px;
         right: 0;
         cursor: pointer;
-        top: 1px;
+        top: -1px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -75,7 +75,7 @@
     display: flex;
     transition: all 0.3s ease-in-out;
     gap: 10px;
-    max-width: 44px;
+    max-width: 55px;
     opacity: 0;
     button {
       cursor: pointer;
@@ -88,6 +88,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative;
       svg {
         color: var(--secondary_color);
         font-size: unset;
