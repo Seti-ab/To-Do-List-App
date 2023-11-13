@@ -5,37 +5,52 @@
   color: var(--tertiary_color);
   background-color: var(--light_primary_color);
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
-  min-height: 48px;
   gap: 8px;
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
   &:hover {
     cursor: pointer;
     transition: box-shadow 0.2s ease-in-out;
     .actions {
+      max-width: 104px;
+      transition: all 0.3s ease-in-out;
       opacity: 1;
-      transition: opacity 0.2s ease-in-out;
+      button {
+        svg {
+          font-size: 16px;
+          transition: all 0.2s ease-in-out;
+        }
+      }
     }
   }
+  
   .title {
     display: flex;
     align-items: baseline;
     justify-content: flex-start;
-    text-align: left;
     gap: 8px;
+    text-align: left;
     width: 100%;
     p {
+      font-size: 1.1rem;
       word-break: break-word;
+      white-space:pre-wrap;
     }
     .editingForm {
       width: 100%;
       position: relative;
       input {
         background: #f2f2f2;
-        padding: 6px 30px 6px 8px;
+        padding: 2px 30px 2px 8px;
         border: none;
         border-radius: 4px;
         width: 100%;
+        font-size: 1rem;
+        &:focus{
+          outline: none;
+        }
       }
       .undoButton {
         position: absolute;
@@ -46,7 +61,7 @@
         width: 32px;
         right: 0;
         cursor: pointer;
-        top: 1px;
+        top: -1px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -58,9 +73,10 @@
   }
   .actions {
     display: flex;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
+    transition: all 0.3s ease-in-out;
     gap: 10px;
+    max-width: 55px;
+    opacity: 0;
     button {
       cursor: pointer;
       border: none;
@@ -72,9 +88,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative;
       svg {
         color: var(--secondary_color);
-        font-size: 16px;
+        font-size: unset;
+        transition: all 0.2s ease-in-out;
       }
       &:hover {
         background-color: var(--highlight_color);
@@ -84,13 +102,20 @@
   }
   .editingButtons {
     opacity: 1;
+    max-width: fit-content;
+    justify-content: center;
+    button {
+      svg {
+        font-size: 16px;
+      }
+    }
   }
 
   //numbers
   span {
     color: var(--secondary_color);
     font-weight: bold;
-    font-size: small;
+    font-size: 0.7rem;
     user-select: none;
   }
 }
@@ -100,5 +125,22 @@
   .actions button svg,
   span {
     color: var(--secondary_color);
+  }
+}
+.taskDeleted{
+  opacity: 0;
+  transition: all 0.3s ease-in-out !important;
+}
+@media screen and (max-width: 480px) {
+  .task {
+    flex-direction: column;
+    .actions {
+      opacity: 1;
+      max-width: fit-content;
+      align-self: center;
+      button svg {
+        font-size: 16px;
+      }
+    }
   }
 }

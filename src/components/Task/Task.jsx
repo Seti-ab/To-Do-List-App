@@ -10,37 +10,69 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslation } from "react-i18next";
+import TitleTag from "../TitleTag/TitleTag";
 
-const Task = ({ task, dispatch, index }) => {
+const Task = ({ task, dispatch, index, error, setError }) => {
+  const { t } = useTranslation();
   const [editMode, setEditMode] = useState(false);
   const [editedTitle, setEditedTitle] = useState(task.title);
+  const [deleted, setDeleted] = useState();
+
   const newRef = useRef(null);
 
-  const handleEditConfirm = () => {
-    dispatch({ type: "edit", payload: { title: editedTitle, id: task.id } });
-    setEditMode(false);
-  };
-
-  const handleOutsideClick = (e) => {
-    if (newRef.current && !newRef.current.contains(e.target)) {
+  const isValid = editedTitle.length >= 3 && editedTitle.length <= 255;
+  const handleEditConfirm = (e) => {
+    e.preventDefault();
+    if (isValid) {
+      dispatch({ type: "edit", payload: { title: editedTitle, id: task.id } });
       setEditMode(false);
+    }
+    if (editedTitle.length < 3) {
+      setError({ show: true, message: "input_must_be_at_least_3_characters" });
+    } else if (editedTitle.length > 250) {
+      setError({
+        show: true,
+        message: "input_cant_be_more_than_250_characters",
+      });
+    } else {
+      setError({ ...error, show: false });
     }
   };
 
   useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (newRef.current && !newRef.current.contains(e.target)) {
+        setEditMode(false);
+        setError({ ...error, show: false });
+      }
+    };
+
     document.addEventListener("mousedown", handleOutsideClick);
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
-  });
+  }, [error, setError]);
 
   const handleUndoEdit = () => {
     setEditedTitle(task.title);
+    setError({ ...error, show: false });
   };
-
+  const handleTaskDelete = () => {
+    setDeleted(true);
+    setTimeout(() => {
+      dispatch({ type: "delete", payload: { id: task.id } });
+    }, [300]);
+  };
   return (
     <li
-      className={styles.task + " " + (task.done ? styles.taskDone : "")}
+      className={
+        styles.task +
+        " " +
+        (task.done ? styles.taskDone : "") +
+        " " +
+        (deleted ? styles.taskDeleted : "")
+      }
       ref={newRef}
     >
       {editMode === false ? (
@@ -52,7 +84,7 @@ const Task = ({ task, dispatch, index }) => {
           <div className={styles.actions}>
             <button
               onClick={() =>
-                dispatch({ type: "toggle", payload: { id: task?.id } })
+                dispatch({ type: "toggle", payload: { id: task.id } })
               }
             >
               {task.done === false ? (
@@ -60,16 +92,15 @@ const Task = ({ task, dispatch, index }) => {
               ) : (
                 <FontAwesomeIcon icon={faSquareMinus} />
               )}
+              <TitleTag text={task.done ? t("undone") : t("done")} />
             </button>
             <button onClick={() => setEditMode(true)}>
               <FontAwesomeIcon icon={faPenToSquare} />
+              <TitleTag text={t("edit")} />
             </button>
-            <button
-              onClick={() =>
-                dispatch({ type: "delete", payload: { id: task.id } })
-              }
-            >
+            <button onClick={handleTaskDelete}>
               <FontAwesomeIcon icon={faTrash} />
+              <TitleTag text={t("delete")} />
             </button>
           </div>
         </>
@@ -95,11 +126,13 @@ const Task = ({ task, dispatch, index }) => {
             </form>
           </div>
           <div className={styles.actions + " " + styles.editingButtons}>
-            <button onClick={() => setEditMode(false)}>
-              <FontAwesomeIcon icon={faXmark} />
-            </button>
             <button type="submit" onClick={handleEditConfirm}>
               <FontAwesomeIcon icon={faCheck} />
+              <TitleTag text={t("confirm")} />
+            </button>
+            <button onClick={() => setEditMode(false)}>
+              <FontAwesomeIcon icon={faXmark} />
+              <TitleTag text={t("cancel")} />
             </button>
           </div>
         </>

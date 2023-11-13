@@ -1,13 +1,15 @@
 @font-face {
-  font-family: Tanha;
-  src: url('./assets/fonts/tanha-font-v0.9/Tanha.eot'),
-       url('./assets/fonts/tanha-font-v0.9/Tanha.woff') format('woff'),
-       url('./assets/fonts/tanha-font-v0.9/Tanha.ttf') format('truetype');
+  font-family: PlaypenSans;
+  src: url("./assets/fonts/PlaypenSans-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
-  size-adjust: 90%;
 }
-
+@font-face {
+  font-family: DigiSarvenaz;
+  src: url("./assets/fonts/Digi Sarvenaz.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
@@ -20,7 +22,6 @@ body {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: "PlaypenSans", "DigiSarvenaz";
 }
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
-}
+

@@ -5,5 +5,14 @@
   "input_cant_be_more_than_250_characters": "حداکثر تعداد کاراکتر مجاز ۲۵۰ می باشد.",
   "default": "پیشفرض",
   "dark": "تیره",
-  "light": "روشن"
+  "light": "روشن",
+  "import_file_confiramation":"آیا از وارد کردن لیست کار ها از این فایل مطمئن هستید ؟",
+  "confirm":"تائید",
+  "cancel":"انصراف",
+  "export":"ذخیره فایل",
+  "import":"آپلود فایل",
+  "done":"انجام شد",
+  "undone":"انجام نشده",
+  "edit":"ویرایش",
+  "delete":"حذف"
 }
