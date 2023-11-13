@@ -5,6 +5,7 @@
     top: 0;
     bottom: 0;
     cursor: pointer;
+    user-select: none;
     p {
         font-size: 0.6rem;
         color: var(--tertiary_color);
