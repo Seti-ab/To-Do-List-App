@@ -7,12 +7,15 @@
   "dark": "تیره",
   "light": "روشن",
   "import_file_confiramation":"آیا از وارد کردن لیست کار ها از این فایل مطمئن هستید ؟",
+  "delete_all_confiramation":"آیا از حذف لیست کار ها اطمی",
   "confirm":"تائید",
   "cancel":"انصراف",
-  "export":"ذخیره فایل",
+  "export":"استخراج فایل",
   "import":"آپلود فایل",
   "done":"انجام شد",
   "undone":"انجام نشده",
   "edit":"ویرایش",
-  "delete":"حذف"
+  "delete":"حذف",
+  "delete_all":"حذف همه"
+
 }

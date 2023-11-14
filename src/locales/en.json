@@ -14,5 +14,6 @@
   "done":"Done",
   "undone":"Undone",
   "edit":"Edit",
-  "delete":"Delete"
+  "delete":"Delete",
+  "delete_all":"Delete All"
 }
