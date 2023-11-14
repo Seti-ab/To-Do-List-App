@@ -7,6 +7,7 @@
   "dark": "Dark",
   "light": "Light",
   "import_file_confiramation":"Are you sure you want to import to-do list from this file?",
+  "delete_all_confiramation":"Are you sure you want to delete all tasks from your to-do list?",
   "confirm":"Confirm",
   "cancel":"Cancel",
   "export":"Export",
@@ -14,5 +15,6 @@
   "done":"Done",
   "undone":"Undone",
   "edit":"Edit",
-  "delete":"Delete"
+  "delete":"Delete",
+  "delete_all":"Delete All"
 }

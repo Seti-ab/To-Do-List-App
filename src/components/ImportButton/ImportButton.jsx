@@ -1,14 +1,18 @@
+import React from "react";
 import { faFileImport } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import styles from "./ImportExport.module.scss";
+import SmallButton from "../SmallButton/SmallButton";
+import Tooltip from "../Tooltip/Tooltip";
+import { useTranslation } from "react-i18next";
 
-const ImportButton = ({ handleChange, importFileRef, children }) => {
+const ImportButton = ({ handleChange, importFileRef }) => {
+  const {t}=useTranslation();
+  
   return (
-    <div className={styles.importExportContainer}>
+    <SmallButton title="import">
       <label htmlFor="file-input">
         <FontAwesomeIcon icon={faFileImport} />
-        {children}
+        <Tooltip text={t("import")} direction="left"/>
       </label>
       <input
         ref={importFileRef}
@@ -17,7 +21,7 @@ const ImportButton = ({ handleChange, importFileRef, children }) => {
         accept=".txt"
         onChange={handleChange}
       />
-    </div>
+    </SmallButton>
   );
 };
 

@@ -8,7 +8,8 @@
     h1 {
       color: var(--secondary_color);
       font-size: 3rem;
-      margin: 1rem;
+      margin: 1rem auto;
+      width: 60vw;
     }
     label {
       display: flex;
@@ -153,9 +154,9 @@
   position: fixed;
   top: 0;
   display: flex;
-  align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 8px;
-
+  padding: 12px;
+  flex-direction: column;
+  gap: 12px;
 }
