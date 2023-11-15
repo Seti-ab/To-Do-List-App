@@ -10,7 +10,7 @@ const ExportButton = ({ handleClick }) => {
   return (
     <SmallButton title="export" handleClick={handleClick}>
       <FontAwesomeIcon icon={faFileExport} />
-      <Tooltip text={t("export")} direction="left"/>
+      <Tooltip text={t("export")} side/>
     </SmallButton>
   );
 };

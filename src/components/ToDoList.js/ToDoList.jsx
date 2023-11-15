@@ -190,7 +190,7 @@ const ToDoList = ({ locale }) => {
         <SmallButton>
           <button onClick={handleConfirmDelete}>
             <FontAwesomeIcon icon={faEraser} />
-            <Tooltip text={t("delete_all")} direction="left" />
+            <Tooltip text={t("delete_all")} side />
           </button>
         </SmallButton>
       </div>

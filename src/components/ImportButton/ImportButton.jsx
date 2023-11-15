@@ -12,7 +12,7 @@ const ImportButton = ({ handleChange, importFileRef }) => {
     <SmallButton title="import">
       <label htmlFor="file-input">
         <FontAwesomeIcon icon={faFileImport} />
-        <Tooltip text={t("import")} direction="left"/>
+        <Tooltip text={t("import")} side/>
       </label>
       <input
         ref={importFileRef}

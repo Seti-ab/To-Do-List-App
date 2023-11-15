@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Tooltip.module.scss";
 
-const Tooltip = ({ text, direction }) => {
+const Tooltip = ({ text, side }) => {
   const locale = localStorage.getItem("locale");
   return (
     <div
@@ -11,7 +11,7 @@ const Tooltip = ({ text, direction }) => {
       }
     >
       <div className={styles.tooltip + " " +
-        (direction === "left" ? (locale==="fa" ? styles.left : styles.right) : styles.default)}>
+        (side ? (locale==="fa" ? styles.left : styles.right) : styles.default)}>
         <p>{text}</p>
       </div>
     </div>
