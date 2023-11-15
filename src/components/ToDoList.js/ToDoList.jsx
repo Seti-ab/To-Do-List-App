@@ -2,7 +2,7 @@ import React, { useEffect, useReducer, useRef, useState } from "react";
 import styles from "./ToDoList.module.scss";
 import Task from "../Task/Task";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEraser, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faEraser, faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
 import toFarsiNumber from "../../utils/toFarsiNumber";
 import { useTranslation } from "react-i18next";
 import { saveAs } from "file-saver";
@@ -65,6 +65,7 @@ const ToDoList = ({ locale }) => {
     import: false,
     deleteAll: false,
   });
+  const [searchInput, setSearchInput] = useState({ show: false, value: "" });
 
   const [importedtasks, setImportedtasks] = useState([]);
   const { t } = useTranslation("");
@@ -172,6 +173,14 @@ const ToDoList = ({ locale }) => {
     setShowConfirmationModal({ import: false, deleteAll: false });
   };
 
+  const handleToggleSearchOrAdd = () => {
+    setSearchInput({ ...searchInput, show: !searchInput.show });
+  };
+  const handleSearch = (e) => {
+    setSearchInput({ ...searchInput, value: e.target.value });
+  };
+
+  console.log("button workds properly", searchInput);
   return (
     <>
       <div
@@ -191,6 +200,12 @@ const ToDoList = ({ locale }) => {
           <button onClick={handleConfirmDelete}>
             <FontAwesomeIcon icon={faEraser} />
             <Tooltip text={t("delete_all")} side />
+          </button>
+        </SmallButton>
+        <SmallButton>
+          <button onClick={handleToggleSearchOrAdd}>
+            <FontAwesomeIcon icon={searchInput.show ? faPlus : faSearch} />
+            <Tooltip text={t(searchInput.show ? "new task" : "search")} side />
           </button>
         </SmallButton>
       </div>
@@ -227,22 +242,40 @@ const ToDoList = ({ locale }) => {
           actions
         />
 
-        <form onSubmit={handleSubmit}>
-          <h1>{t("to_do_list")}</h1>
-          <label>
-            <input
-              type="text"
-              value={newTask}
-              onChange={handleNewTaskAdd}
-              placeholder={t("things_i_have_to_do")}
-            />
-            {isValid && (
-              <button type="submit">
-                <FontAwesomeIcon icon={faPlus} />
-              </button>
-            )}
-          </label>
-        </form>
+        <h1>{t("to_do_list")}</h1>
+        {searchInput.show ? (
+          <form>
+            <label>
+              <input
+                type="text"
+                value={searchInput.value}
+                onChange={handleSearch}
+                placeholder={t("what_tasks_are_you_looking_for")}
+              />
+              {isValid && (
+                <button type="submit">
+                  <FontAwesomeIcon icon={faSearch} />
+                </button>
+              )}
+            </label>
+          </form>
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <label>
+              <input
+                type="text"
+                value={newTask}
+                onChange={handleNewTaskAdd}
+                placeholder={t("things_i_have_to_do")}
+              />
+              {isValid && (
+                <button type="submit">
+                  <FontAwesomeIcon icon={faPlus} />
+                </button>
+              )}
+            </label>
+          </form>
+        )}
 
         <p
           className={
@@ -254,18 +287,35 @@ const ToDoList = ({ locale }) => {
           {t(error.message)}
         </p>
         <ul className={styles.list}>
-          {tasks
-            ?.sort((x, y) => (x.done === y.done ? 0 : x.done ? 1 : -1))
-            .map((task, index) => (
-              <Task
-                task={task}
-                dispatch={dispatch}
-                key={task.id}
-                error={error}
-                setError={setError}
-                index={locale === "fa" ? toFarsiNumber(index + 1) : index + 1}
-              />
-            ))}
+          {searchInput.value === ""
+            ? tasks
+                ?.sort((x, y) => (x.done === y.done ? 0 : x.done ? 1 : -1))
+                .map((task, index) => (
+                  <Task
+                    task={task}
+                    dispatch={dispatch}
+                    key={task.id}
+                    error={error}
+                    setError={setError}
+                    index={
+                      locale === "fa" ? toFarsiNumber(index + 1) : index + 1
+                    }
+                  />
+                ))
+            : tasks
+                .filter((task) => task.title.includes(searchInput.value))
+                .map((task, index) => (
+                  <Task
+                    task={task}
+                    dispatch={dispatch}
+                    key={task.id}
+                    error={error}
+                    setError={setError}
+                    index={
+                      locale === "fa" ? toFarsiNumber(index + 1) : index + 1
+                    }
+                  />
+                ))}
         </ul>
       </div>
     </>
