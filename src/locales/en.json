@@ -16,5 +16,6 @@
   "undone":"Undone",
   "edit":"Edit",
   "delete":"Delete",
-  "delete_all":"Delete All"
+  "delete_all":"Delete All",
+  "what_tasks_are_you_looking_for":"What tasks are you looking for?"
 }

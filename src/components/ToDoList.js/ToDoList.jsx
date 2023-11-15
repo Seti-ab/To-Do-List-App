@@ -244,7 +244,7 @@ const ToDoList = ({ locale }) => {
 
         <h1>{t("to_do_list")}</h1>
         {searchInput.show ? (
-          <form>
+          <form onSubmit={(e)=>e.preventDefault()}>
             <label>
               <input
                 type="text"
@@ -252,11 +252,11 @@ const ToDoList = ({ locale }) => {
                 onChange={handleSearch}
                 placeholder={t("what_tasks_are_you_looking_for")}
               />
-              {isValid && (
-                <button type="submit">
-                  <FontAwesomeIcon icon={faSearch} />
-                </button>
-              )}
+
+
+              <button type="submit">
+                <FontAwesomeIcon icon={faSearch} />
+              </button>
             </label>
           </form>
         ) : (
@@ -268,11 +268,9 @@ const ToDoList = ({ locale }) => {
                 onChange={handleNewTaskAdd}
                 placeholder={t("things_i_have_to_do")}
               />
-              {isValid && (
-                <button type="submit">
-                  <FontAwesomeIcon icon={faPlus} />
-                </button>
-              )}
+              <button type="submit">
+                <FontAwesomeIcon icon={faPlus} />
+              </button>
             </label>
           </form>
         )}
@@ -303,7 +301,7 @@ const ToDoList = ({ locale }) => {
                   />
                 ))
             : tasks
-                .filter((task) => task.title.includes(searchInput.value))
+                ?.filter((task) => task.title.includes(searchInput.value))
                 .map((task, index) => (
                   <Task
                     task={task}
