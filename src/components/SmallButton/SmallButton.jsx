@@ -3,8 +3,8 @@ import styles from "./SmallButton.module.scss";
 
 const SmallButton = ({ children, handleClick }) => {
   return (
-      <div className={styles.smallButton}>
-        <button onClick={handleClick}>
+      <div className={styles.smallButton} onClick={handleClick}>
+        <button>
           {children}
         </button>
       </div>

@@ -1,8 +1,7 @@
 import React from "react";
 import styles from "./Tooltip.module.scss";
 
-const Tooltip = ({ text, side }) => {
-  const locale = localStorage.getItem("locale");
+const Tooltip = ({ text, place }) => {
   return (
     <div
       className={
@@ -11,7 +10,7 @@ const Tooltip = ({ text, side }) => {
       }
     >
       <div className={styles.tooltip + " " +
-        (side ? (locale==="fa" ? styles.left : styles.right) : styles.default)}>
+        (place ? (place==="left" ? styles.left : styles.right) : styles.default)}>
         <p>{text}</p>
       </div>
     </div>

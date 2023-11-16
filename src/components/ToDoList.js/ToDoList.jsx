@@ -2,7 +2,11 @@ import React, { useEffect, useReducer, useRef, useState } from "react";
 import styles from "./ToDoList.module.scss";
 import Task from "../Task/Task";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEraser, faPlus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEraser,
+  faListCheck,
+  faPlus,
+} from "@fortawesome/free-solid-svg-icons";
 import toFarsiNumber from "../../utils/toFarsiNumber";
 import { useTranslation } from "react-i18next";
 import { saveAs } from "file-saver";
@@ -48,7 +52,20 @@ const ToDoList = ({ locale }) => {
         });
       case "deleteAll":
         return [];
-
+      case "checkAll":
+        return tasks.map((task) => {
+          return {
+            ...task,
+            done: true,
+          };
+        });
+      case "uncheckAll":
+        return tasks.map((task) => {
+          return {
+            ...task,
+            done: false,
+          };
+        });
       default:
         return tasks;
     }
@@ -65,8 +82,9 @@ const ToDoList = ({ locale }) => {
     import: false,
     deleteAll: false,
   });
-
   const [importedtasks, setImportedtasks] = useState([]);
+  const [doneAll, setDoneAll] = useState(false);
+
   const { t } = useTranslation("");
   const importFileRef = useRef(null);
 
@@ -172,27 +190,33 @@ const ToDoList = ({ locale }) => {
     setShowConfirmationModal({ import: false, deleteAll: false });
   };
 
+  const handleToggleCheck = () => {
+    setDoneAll(!doneAll);
+    doneAll===true ? dispatch({ type: "uncheckAll" }) : dispatch({ type: "checkAll" });
+  };
+
   return (
     <>
       <div
-        className={styles.topBarContainer}
-        style={
-          locale === "fa"
-            ? { alignItems: "flex-start" }
-            : { alignItems: "flex-end" }
-        }
-      >
-        <ImportButton
-          handleChange={handleImportFromFile}
-          importFileRef={importFileRef}
-        />
-        <ExportButton handleClick={handleExportToFile} />
-        <SmallButton>
-          <button onClick={handleConfirmDelete}>
+        className={styles.topBarContainer}>
+        <div>
+          <SmallButton handleClick={handleConfirmDelete}>
             <FontAwesomeIcon icon={faEraser} />
-            <Tooltip text={t("delete_all")} side />
-          </button>
-        </SmallButton>
+            <Tooltip text={t("delete_all")} place="right" />
+          </SmallButton>
+          <SmallButton handleClick={handleToggleCheck}>
+            <FontAwesomeIcon icon={faListCheck} />
+            <Tooltip text={t(doneAll ? "check_all": "uncheck_all")} place="right" />
+
+          </SmallButton>
+        </div>
+        <div>
+          <ImportButton
+            handleChange={handleImportFromFile}
+            importFileRef={importFileRef}
+          />
+          <ExportButton handleClick={handleExportToFile} />
+        </div>
       </div>
       <div
         className={styles.background}

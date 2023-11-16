@@ -149,7 +149,7 @@
   background-color: var(--primary_color);
 }
 
-.topBarContainer{
+.topBarContainer {
   z-index: 5;
   position: fixed;
   top: 0;
@@ -157,6 +157,10 @@
   justify-content: space-between;
   width: 100%;
   padding: 12px;
-  flex-direction: column;
-  gap: 12px;
+  // gap: 12px;
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
 }
