@@ -2,14 +2,19 @@ import React, { useEffect, useReducer, useRef, useState } from "react";
 import styles from "./ToDoList.module.scss";
 import Task from "../Task/Task";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEraser,
+  faListCheck,
+  faPlus,
+} from "@fortawesome/free-solid-svg-icons";
 import toFarsiNumber from "../../utils/toFarsiNumber";
 import { useTranslation } from "react-i18next";
 import { saveAs } from "file-saver";
 import Modal from "../Modal/Modal";
-import ImportButton from "../ImportExport/ImportButton";
-import ExportButton from "../ImportExport/ExportButton";
-import TitleTag from "../TitleTag/TitleTag";
+import ImportButton from "../ImportButton/ImportButton";
+import ExportButton from "../ExportButton/ExportButton";
+import SmallButton from "../SmallButton/SmallButton";
+import Tooltip from "../Tooltip/Tooltip";
 
 const ToDoList = ({ locale }) => {
   const reducer = (tasks, action) => {
@@ -18,9 +23,14 @@ const ToDoList = ({ locale }) => {
         return [
           ...tasks,
           {
-            id: Date.now() + "-" + action.payload.title,
+            id:
+              Date.now() +
+              "-" +
+              (action.payload?.index !== undefined &&
+                action.payload?.index + "-") +
+              action.payload.title,
             title: action.payload.title,
-            done: action.payload.done | false,
+            done: action.payload.done || false,
           },
         ];
       case "toggle":
@@ -45,7 +55,22 @@ const ToDoList = ({ locale }) => {
           }
           return task;
         });
-
+      case "deleteAll":
+        return [];
+      case "checkAll":
+        return tasks.map((task) => {
+          return {
+            ...task,
+            done: true,
+          };
+        });
+      case "uncheckAll":
+        return tasks.map((task) => {
+          return {
+            ...task,
+            done: false,
+          };
+        });
       default:
         return tasks;
     }
@@ -58,8 +83,11 @@ const ToDoList = ({ locale }) => {
     show: false,
     message: "",
   });
-  const [showConfirmImportModal, setShowConfirmImportModal] = useState(false);
+  const Closed_Modals = { import: false, deleteAll: false, isEmpty: false };
+  const [showModal, setShowModal] = useState(Closed_Modals);
   const [importedtasks, setImportedtasks] = useState([]);
+  const [doneAll, setDoneAll] = useState(false);
+
   const { t } = useTranslation("");
   const importFileRef = useRef(null);
 
@@ -99,13 +127,17 @@ const ToDoList = ({ locale }) => {
 
   //export tasks to a .txt file
   const handleExportToFile = () => {
-    const savingFormat = tasks.map((task, index) => {
-      return `${task.done ? "✓" : ""}${
-        locale === "fa" ? toFarsiNumber(index + 1) : index + 1
-      } . ${task.title}\n`;
-    });
-    const file = new Blob(savingFormat, { type: "text/plain;charset=utf-8" });
-    saveAs(file, "myTasks.txt");
+    if (tasks.length > 0) {
+      const savingFormat = tasks.map((task, index) => {
+        return `${task.done ? "✓" : ""}${
+          locale === "fa" ? toFarsiNumber(index + 1) : index + 1
+        } . ${task.title}\n`;
+      });
+      const file = new Blob(savingFormat, { type: "text/plain;charset=utf-8" });
+      saveAs(file, "myTasks.txt");
+    } else {
+      setShowModal({ ...Closed_Modals, isEmpty: true });
+    }
   };
 
   //import tasks from a .txt file
@@ -127,24 +159,28 @@ const ToDoList = ({ locale }) => {
       });
       //remove empty element
       setImportedtasks(temp.filter((t) => t.title));
+      if (temp.filter((t) => t.title).length === 0) {
+        setShowModal({ ...Closed_Modals, isEmpty: true });
+      } else {
+        setShowModal({ ...Closed_Modals, import: true });
+      }
     };
     reader.readAsText(e.target.files[0]);
-    setShowConfirmImportModal(true);
   };
 
   const handleModalClose = () => {
-    setShowConfirmImportModal(false);
+    setShowModal({...Closed_Modals});
     handleClearImportedFile();
   };
 
   const handleConfirmImport = () => {
-    importedtasks.forEach((task) => {
+    importedtasks.forEach((task, index) => {
       dispatch({
         type: "add",
-        payload: { title: task.title, done: task.done },
+        payload: { title: task.title, index: index, done: task.done },
       });
     });
-    setShowConfirmImportModal(false);
+    setShowModal(...Closed_Modals);
     setImportedtasks([]);
     handleClearImportedFile();
   };
@@ -156,20 +192,46 @@ const ToDoList = ({ locale }) => {
       importFileRef.current.type = "file";
     }
   };
+
+  const handleConfirmDelete = () => {
+    setShowModal({...Closed_Modals, deleteAll: true});
+  };
+  const handleDeleteAllTasks = () => {
+    dispatch({ type: "deleteAll" });
+    setShowModal({ ...Closed_Modals });
+  };
+
+  const handleToggleCheck = () => {
+    setDoneAll(!doneAll);
+    doneAll === true
+      ? dispatch({ type: "uncheckAll" })
+      : dispatch({ type: "checkAll" });
+  };
+
   return (
     <>
       <div className={styles.topBarContainer}>
-        <ImportButton
-          handleChange={handleImportFromFile}
-          importFileRef={importFileRef}
-        >
-          <TitleTag text={t("import")} />
-        </ImportButton>
-        <ExportButton handleClick={handleExportToFile}>
-          <TitleTag text={t("export")} />
-        </ExportButton>
+        <div>
+          <SmallButton handleClick={handleConfirmDelete}>
+            <FontAwesomeIcon icon={faEraser} />
+            <Tooltip text={t("delete_all")} place="right" />
+          </SmallButton>
+          <SmallButton handleClick={handleToggleCheck}>
+            <FontAwesomeIcon icon={faListCheck} />
+            <Tooltip
+              text={t(doneAll ? "uncheck_all" : "check_all")}
+              place="right"
+            />
+          </SmallButton>
+        </div>
+        <div>
+          <ImportButton
+            handleChange={handleImportFromFile}
+            importFileRef={importFileRef}
+          />
+          <ExportButton handleClick={handleExportToFile} />
+        </div>
       </div>
-
       <div
         className={styles.background}
         onClick={() => setError({ ...error, show: false })}
@@ -182,15 +244,32 @@ const ToDoList = ({ locale }) => {
           " " +
           (error.show ? styles.errorBox : "")
         }
-        style={showConfirmImportModal ? { zIndex: 5 } : {}}
+        style={
+          Object.values(showModal).find((modal) => modal === true)
+            ? { zIndex: 5 }
+            : {}
+        }
       >
         <Modal
-          show={showConfirmImportModal}
+          show={showModal.import}
           text={t("import_file_confiramation")}
           handleClose={() => handleModalClose()}
           handleConfirm={() => handleConfirmImport()}
           actions
         />
+        <Modal
+          show={showModal.deleteAll}
+          text={t("delete_all_confiramation")}
+          handleClose={() => handleModalClose()}
+          handleConfirm={() => handleDeleteAllTasks()}
+          actions
+        />
+        <Modal
+          show={showModal.isEmpty}
+          text={t("list_is_empty")}
+          handleClose={() => handleModalClose()}
+        />
+
         <form onSubmit={handleSubmit}>
           <h1>{t("to_do_list")}</h1>
           <label>

@@ -11,7 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslation } from "react-i18next";
-import TitleTag from "../TitleTag/TitleTag";
+import Tooltip from "../Tooltip/Tooltip";
 
 const Task = ({ task, dispatch, index, error, setError }) => {
   const { t } = useTranslation();
@@ -92,15 +92,15 @@ const Task = ({ task, dispatch, index, error, setError }) => {
               ) : (
                 <FontAwesomeIcon icon={faSquareMinus} />
               )}
-              <TitleTag text={task.done ? t("undone") : t("done")} />
+              <Tooltip text={task.done ? t("undone") : t("done")} />
             </button>
             <button onClick={() => setEditMode(true)}>
               <FontAwesomeIcon icon={faPenToSquare} />
-              <TitleTag text={t("edit")} />
+              <Tooltip text={t("edit")} />
             </button>
             <button onClick={handleTaskDelete}>
               <FontAwesomeIcon icon={faTrash} />
-              <TitleTag text={t("delete")} />
+              <Tooltip text={t("delete")} />
             </button>
           </div>
         </>
@@ -128,11 +128,11 @@ const Task = ({ task, dispatch, index, error, setError }) => {
           <div className={styles.actions + " " + styles.editingButtons}>
             <button type="submit" onClick={handleEditConfirm}>
               <FontAwesomeIcon icon={faCheck} />
-              <TitleTag text={t("confirm")} />
+              <Tooltip text={t("confirm")} />
             </button>
             <button onClick={() => setEditMode(false)}>
               <FontAwesomeIcon icon={faXmark} />
-              <TitleTag text={t("cancel")} />
+              <Tooltip text={t("cancel")} />
             </button>
           </div>
         </>

@@ -1,34 +1,53 @@
-.TitleTagContainer {
+.tooltipContainer {
     position: absolute;
     width: fit-content;
-    height: 110%;
+    max-width: 168%;
+    height: 105%;
     top: 0;
     bottom: 0;
     cursor: pointer;
     user-select: none;
+    display: flex;
+    align-items: center;
     p {
         font-size: 0.6rem;
-        color: var(--tertiary_color);
+        color: #ffffff;
         text-wrap: nowrap;
     }
-    div {
+    .tooltip {
         position: relative;
         width: fit-content;
-        background-color: var(--light_secondary_color);
+        background-color: var(--tooltip_color);
         border-radius: 4px;
         padding: 2px 6px;
         display: flex;
         align-items: center;
         justify-content: center;
-        top: 28px;
         opacity: 0;
         transition: all 0.2s ease-in-out;
     }
+    .default {
+        top: 24px;
+    }
+    .right{
+        left: 70%;
+    }
+    .left{
+        right: 75%;
+    }
     &:hover {
-        div {
-            top: 36px;
+        .tooltip {
             opacity: 1;
             transition: all 0.2s ease-in-out;
+        }
+        .default {
+            top: 30px;
+        }
+        .right{
+            left: 90%;
+        }
+        .left{
+            right: 95%;
         }
     }
 }
