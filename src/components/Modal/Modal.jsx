@@ -15,7 +15,7 @@ const Modal = ({ show, handleClose, text, handleConfirm, actions }) => {
           </span>
           <div className={styles.content}>
             <p>{text}</p>
-            {actions && (
+            {actions ? (
               <div className={styles.actions}>
                 <button
                   className={styles.confirmButton}
@@ -25,6 +25,12 @@ const Modal = ({ show, handleClose, text, handleConfirm, actions }) => {
                 </button>
                 <button className={styles.cancelButton} onClick={handleClose}>
                   {t("cancel")}
+                </button>
+              </div>
+            ) : (
+              <div className={styles.actions}>
+                <button className={styles.confirmButton} onClick={handleClose}>
+                  {t("ok")}
                 </button>
               </div>
             )}

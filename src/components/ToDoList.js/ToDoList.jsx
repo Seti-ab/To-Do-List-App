@@ -83,10 +83,8 @@ const ToDoList = ({ locale }) => {
     show: false,
     message: "",
   });
-  const [showConfirmationModal, setShowConfirmationModal] = useState({
-    import: false,
-    deleteAll: false,
-  });
+  const Closed_Modals = { import: false, deleteAll: false, isEmpty: false };
+  const [showModal, setShowModal] = useState(Closed_Modals);
   const [importedtasks, setImportedtasks] = useState([]);
   const [doneAll, setDoneAll] = useState(false);
 
@@ -129,13 +127,17 @@ const ToDoList = ({ locale }) => {
 
   //export tasks to a .txt file
   const handleExportToFile = () => {
-    const savingFormat = tasks.map((task, index) => {
-      return `${task.done ? "✓" : ""}${
-        locale === "fa" ? toFarsiNumber(index + 1) : index + 1
-      } . ${task.title}\n`;
-    });
-    const file = new Blob(savingFormat, { type: "text/plain;charset=utf-8" });
-    saveAs(file, "myTasks.txt");
+    if (tasks.length > 0) {
+      const savingFormat = tasks.map((task, index) => {
+        return `${task.done ? "✓" : ""}${
+          locale === "fa" ? toFarsiNumber(index + 1) : index + 1
+        } . ${task.title}\n`;
+      });
+      const file = new Blob(savingFormat, { type: "text/plain;charset=utf-8" });
+      saveAs(file, "myTasks.txt");
+    } else {
+      setShowModal({ ...Closed_Modals, isEmpty: true });
+    }
   };
 
   //import tasks from a .txt file
@@ -157,13 +159,17 @@ const ToDoList = ({ locale }) => {
       });
       //remove empty element
       setImportedtasks(temp.filter((t) => t.title));
+      if (temp.filter((t) => t.title).length === 0) {
+        setShowModal({ ...Closed_Modals, isEmpty: true });
+      } else {
+        setShowModal({ ...Closed_Modals, import: true });
+      }
     };
     reader.readAsText(e.target.files[0]);
-    setShowConfirmationModal({ import: true, deleteAll: false });
   };
 
   const handleModalClose = () => {
-    setShowConfirmationModal({ import: false, deleteAll: false });
+    setShowModal({...Closed_Modals});
     handleClearImportedFile();
   };
 
@@ -174,7 +180,7 @@ const ToDoList = ({ locale }) => {
         payload: { title: task.title, index: index, done: task.done },
       });
     });
-    setShowConfirmationModal({ import: false, deleteAll: false });
+    setShowModal(...Closed_Modals);
     setImportedtasks([]);
     handleClearImportedFile();
   };
@@ -188,11 +194,11 @@ const ToDoList = ({ locale }) => {
   };
 
   const handleConfirmDelete = () => {
-    setShowConfirmationModal({ import: false, deleteAll: true });
+    setShowModal({...Closed_Modals, deleteAll: true});
   };
   const handleDeleteAllTasks = () => {
     dispatch({ type: "deleteAll" });
-    setShowConfirmationModal({ import: false, deleteAll: false });
+    setShowModal({ ...Closed_Modals });
   };
 
   const handleToggleCheck = () => {
@@ -239,24 +245,29 @@ const ToDoList = ({ locale }) => {
           (error.show ? styles.errorBox : "")
         }
         style={
-          Object.values(showConfirmationModal).find((modal) => modal === true)
+          Object.values(showModal).find((modal) => modal === true)
             ? { zIndex: 5 }
             : {}
         }
       >
         <Modal
-          show={showConfirmationModal.import}
+          show={showModal.import}
           text={t("import_file_confiramation")}
           handleClose={() => handleModalClose()}
           handleConfirm={() => handleConfirmImport()}
           actions
         />
         <Modal
-          show={showConfirmationModal.deleteAll}
+          show={showModal.deleteAll}
           text={t("delete_all_confiramation")}
           handleClose={() => handleModalClose()}
           handleConfirm={() => handleDeleteAllTasks()}
           actions
+        />
+        <Modal
+          show={showModal.isEmpty}
+          text={t("list_is_empty")}
+          handleClose={() => handleModalClose()}
         />
 
         <form onSubmit={handleSubmit}>
