@@ -16,5 +16,7 @@
   "undone":"Undone",
   "edit":"Edit",
   "delete":"Delete",
-  "delete_all":"Delete All"
+  "delete_all":"Delete All",
+  "check_all":"Check All",
+  "uncheck_all":"Uncheck All"
 }

@@ -206,7 +206,7 @@ const ToDoList = ({ locale }) => {
           </SmallButton>
           <SmallButton handleClick={handleToggleCheck}>
             <FontAwesomeIcon icon={faListCheck} />
-            <Tooltip text={t(doneAll ? "check_all": "uncheck_all")} place="right" />
+            <Tooltip text={t(doneAll ? "uncheck_all": "check_all")} place="right" />
 
           </SmallButton>
         </div>

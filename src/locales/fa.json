@@ -16,6 +16,8 @@
   "undone":"انجام نشده",
   "edit":"ویرایش",
   "delete":"حذف",
-  "delete_all":"حذف همه"
+  "delete_all":"حذف همه",
+  "check_all":"انجام همه",
+  "uncheck_all":"انجام‌ندادن همه"
 
 }
