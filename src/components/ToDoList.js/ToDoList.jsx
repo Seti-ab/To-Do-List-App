@@ -23,7 +23,12 @@ const ToDoList = ({ locale }) => {
         return [
           ...tasks,
           {
-            id: Date.now() + "-" + action.payload.title,
+            id:
+              Date.now() +
+              "-" +
+              (action.payload?.index !== undefined &&
+                action.payload?.index + "-") +
+              action.payload.title,
             title: action.payload.title,
             done: action.payload.done || false,
           },
@@ -163,10 +168,10 @@ const ToDoList = ({ locale }) => {
   };
 
   const handleConfirmImport = () => {
-    importedtasks.forEach((task) => {
+    importedtasks.forEach((task, index) => {
       dispatch({
         type: "add",
-        payload: { title: task.title, done: task.done },
+        payload: { title: task.title, index: index, done: task.done },
       });
     });
     setShowConfirmationModal({ import: false, deleteAll: false });
@@ -192,13 +197,14 @@ const ToDoList = ({ locale }) => {
 
   const handleToggleCheck = () => {
     setDoneAll(!doneAll);
-    doneAll===true ? dispatch({ type: "uncheckAll" }) : dispatch({ type: "checkAll" });
+    doneAll === true
+      ? dispatch({ type: "uncheckAll" })
+      : dispatch({ type: "checkAll" });
   };
 
   return (
     <>
-      <div
-        className={styles.topBarContainer}>
+      <div className={styles.topBarContainer}>
         <div>
           <SmallButton handleClick={handleConfirmDelete}>
             <FontAwesomeIcon icon={faEraser} />
@@ -206,8 +212,10 @@ const ToDoList = ({ locale }) => {
           </SmallButton>
           <SmallButton handleClick={handleToggleCheck}>
             <FontAwesomeIcon icon={faListCheck} />
-            <Tooltip text={t(doneAll ? "uncheck_all": "check_all")} place="right" />
-
+            <Tooltip
+              text={t(doneAll ? "uncheck_all" : "check_all")}
+              place="right"
+            />
           </SmallButton>
         </div>
         <div>

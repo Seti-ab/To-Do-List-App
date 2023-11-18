@@ -1,7 +1,7 @@
 .tooltipContainer {
     position: absolute;
     width: fit-content;
-    max-width: 138%;
+    max-width: 168%;
     height: 105%;
     top: 0;
     bottom: 0;
@@ -11,7 +11,7 @@
     align-items: center;
     p {
         font-size: 0.6rem;
-        color: var(--tertiary_color);
+        color: #ffffff;
         text-wrap: nowrap;
     }
     .tooltip {
@@ -30,7 +30,7 @@
         top: 24px;
     }
     .right{
-        left: 75%;
+        left: 70%;
     }
     .left{
         right: 75%;
@@ -44,7 +44,7 @@
             top: 30px;
         }
         .right{
-            left: 95%;
+            left: 90%;
         }
         .left{
             right: 95%;
