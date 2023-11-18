@@ -1,7 +1,7 @@
 .tooltipContainer {
     position: absolute;
-    max-width: fit-content;
-    width: 164%;
+    width: fit-content;
+    max-width: 138%;
     height: 105%;
     top: 0;
     bottom: 0;
@@ -29,10 +29,10 @@
     .default {
         top: 24px;
     }
-    .left{
+    .right{
         left: 75%;
     }
-    .right{
+    .left{
         right: 75%;
     }
     &:hover {
@@ -43,10 +43,10 @@
         .default {
             top: 30px;
         }
-        .left{
+        .right{
             left: 95%;
         }
-        .right{
+        .left{
             right: 95%;
         }
     }
