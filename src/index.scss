@@ -1,14 +1,16 @@
 @font-face {
   font-family: PlaypenSans;
-  src: url("./assets/fonts/PlaypenSans-Regular.ttf") format("truetype");
+  src: url("./assets/fonts/PlaypenSans-Regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: DigiSarvenaz;
-  src: url("./assets/fonts/Digi Sarvenaz.ttf") format("truetype");
+  src: url("./assets/fonts/Digi Sarvenaz.woff") format("woff");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 body {
   margin: 0;
