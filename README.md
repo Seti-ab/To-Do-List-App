@@ -1,7 +1,7 @@
 ## Project Name & Description
-### Deployed on [seti-ab.github.io/to-do-list-app](https://seti-ab.github.io/to-do-list-app/) using GitHub Pages.
+### Deployed on [seti-ab.github.io/to-do-list-app](https://seti-ab.github.io/to-do-list-app/) using `GitHub Pages`.
 
-***Since this is a front-end demo project, all data is stored in your browser's local storage.**
+> Since this is a front-end demo project, data is stored in your browser's local storage.</pre>
 
 Project Name: **To-Do List App Demo**
 
@@ -34,7 +34,7 @@ To promote a sense of accomplishment and motivation by enabling users to track t
 
 ## Installation and Setup Instructions
 Clone down this repository. You will need `node` and `npm` installed globally on your machine.  
-### Node version  : 18.18.0
+> ### Node version  : 18.18.0
 Installation:
 
 `npm install`  
@@ -48,13 +48,12 @@ To Visit App:
 `localhost:3000`
 
 ## Project Screen Shots
-### Overview:
+> ### Overview:
 ![Screenshot 2023-11-18 184512](https://github.com/seti-ab/to-do-list-app/assets/95739100/c2d8ac6c-9cdd-49ab-8f6d-d310110a33ed)
 
-### 3 Theme Colors:
+> ### 3 Theme Colors:
 ![Screenshot 2023-11-18 184512](https://github.com/seti-ab/to-do-list-app/assets/95739100/0d9ab7fb-556e-443f-bd7c-4fd294859da6)
 
-
-### Tasks:
+> ### Tasks:
 ![Screenshot 2023-11-18 190649](https://github.com/seti-ab/to-do-list-app/assets/95739100/53e17846-d994-44b5-98cc-18918932f87a)
 
