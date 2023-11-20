@@ -31,7 +31,6 @@ To promote a sense of accomplishment and motivation by enabling users to track t
 
 - Responsive: The project's responsive layout ensures that it scales effortlessly from desktops to tablets and smartphones, providing a consistent and user-friendly experience regardless of the device.
 
-- PWA : The project's PWA capabilities deliver a more app-like experience.
 
 ## Installation and Setup Instructions
 Clone down this repository. You will need `node` and `npm` installed globally on your machine.  

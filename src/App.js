@@ -22,22 +22,6 @@ function App() {
 
   }, [])
 
-  //top bar color for PWA
-  useEffect(() => {
-    switch (theme) {
-      case "default":
-      default:
-        document.querySelector("meta[name='theme-color']").content = "#363062";
-        break;
-      case "dark":
-        document.querySelector("meta[name='theme-color']").content = "#132043";
-        break;
-      case "light":
-        document.querySelector("meta[name='theme-color']").content = "#fff2d8";
-        break;
-    }
-  }, [theme])
-
   return (
     <div className="App" data-theme={theme}>
       <ToDoList locale={locale} />
