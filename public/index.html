@@ -19,14 +19,5 @@
   <div id="root"></div>
 
 </body>
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('%PUBLIC_URL%/service-worker.js')
-        .then((reg) => console.log("success", reg.scope))
-        .catch((err) => console.log("fail", err))
-    })
-  }
-</script>
 
 </html>
