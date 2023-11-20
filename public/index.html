@@ -5,8 +5,9 @@
   <meta charset="utf-8" />
   <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, user-scalable=no" />
   <meta name="theme-color" content="#363062" />
-  <meta name="description" content="A web-based application that allows users to create, manage, and track tasks." />
+  <meta name="description" content="Organize your tasks with this task manager and To-Do List app" />
   <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
 
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
@@ -19,5 +20,14 @@
   <div id="root"></div>
 
 </body>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('%PUBLIC_URL%/serviceworker.js')
+        .then((reg) => console.log("success", reg.scope))
+        .catch((err) => console.log("fail", err))
+    })
+  }
+</script>
 
 </html>
