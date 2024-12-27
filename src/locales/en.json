@@ -20,5 +20,6 @@
   "check_all": "Check All",
   "uncheck_all": "Uncheck All",
   "list_is_empty": "The list you're trying to import/export is empty!",
-  "ok":"OK"
+  "ok":"OK",
+  "logout":"Logout"
 }

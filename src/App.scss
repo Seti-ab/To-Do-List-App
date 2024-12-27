@@ -1,5 +1,7 @@
 @import "./themes.css";
+
 .App {
+    height: 100vh;
     text-align: center;
     min-height: 94vh;
     display: flex;
@@ -11,6 +13,10 @@
     background-color: var(--primary_color);
     text-align: center;
     .selectorsContainer {
+        > div {
+            display: flex;
+            gap: 12px;
+        }
         position: fixed;
         bottom: 0;
         z-index: 3;
