@@ -28,14 +28,14 @@ function App() {
 
     // Check for an existing user in localStorage, else set a test user
     const savedUser = localStorage.getItem('user');
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
-    } else {
-      // Set a test user if no user is found
-      const testUser = { username: 'testuser', email: 'test@example.com' };
-      setUser(testUser);
-      localStorage.setItem('user', JSON.stringify(testUser)); // Persist the test user
-    }
+    // if (savedUser) {
+    //   setUser(JSON.parse(savedUser));
+    // } else {
+    //   // Set a test user if no user is found
+    //   const testUser = { username: 'testuser', email: 'test@example.com' };
+    //   setUser(testUser);
+    //   localStorage.setItem('user', JSON.stringify(testUser)); // Persist the test user
+    // }
   }, []);
 
   useEffect(() => {
